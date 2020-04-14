@@ -1,0 +1,6 @@
+cmake_minimum_required(VERSION 3.15)
+project(Projet-Info-S2)
+set(CMAKE_CXX_STANDARD 14)
+add_executable(Projet-Info-S2 main.cpp graphe.h graphe.cpp sommet.h sommet.cpp arete.cpp arete.h )
+
+il faudra juste ajouter un cmakelist manuellement et ajouter ce texte mais apres c'est bon
