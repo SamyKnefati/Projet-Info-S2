@@ -3,8 +3,14 @@
 //
 
 #include <iostream>
+#include "Graphe.h"
 
 int main ()
 {
-    std::cout<<"hello";
+    std::cout << "test reussi"<<std::endl;
+    size_t s0 = 0;
+    Graphe g{"../Graphe_NO"};
+    std::vector<int> arborescence;
+    g.afficher();
+    g.Tri();
 }
