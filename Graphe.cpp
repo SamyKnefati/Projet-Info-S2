@@ -36,7 +36,7 @@ Graphe::Graphe(std::string cheminFichierGraphe) {
         if(!m_estOriente && num1 < num2) {
             m_sommets[num2]->addSuccesseur(m_sommets[num1]);
         }
-        m_arrete.push_back(new Arretes(num1,num2,num3)); /// ajout d'arrete avec leur poids.
+        m_arrete.push_back(new Aretes(num1,num2,num3)); /// ajout d'arrete avec leur poids.
     }
 
 }
@@ -73,7 +73,7 @@ void::Graphe::Tri() {
         for (int a = 0; a != (m_arrete.size() - 1); a++) {
             if (m_arrete[a]->Getpoids() > m_arrete[a + 1]->Getpoids())
             {
-                Arretes *inter;
+                Aretes *inter;
 
                 inter = m_arrete[a];
 

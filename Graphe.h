@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include "Sommets.h"
-#include "arretes.h"
+#include "arete.h"
 
 
 class Graphe {
@@ -12,7 +12,7 @@ private:
     bool m_estOriente;
     int m_poids;
     std::vector< Sommet*> m_sommets;
-    std::vector< Arretes*> m_arrete;
+    std::vector< Aretes*> m_arrete;
 public:
     Graphe(std:: string cheminFichierGraphe);
     ~Graphe();
