@@ -1,23 +1,26 @@
 #ifndef PROJET_INFO_S2_GRAPHE_H
 #define PROJET_INFO_S2_GRAPHE_H
+
 #include <iostream>
-#include <fstream>
-#include <queue>
-#include "Sommet.h"
-#include "Arete.h"
-#include <vector>
-#include "algorithm"
+#include "Sommets.h"
+#include "arete.h"
+
 
 class Graphe {
+
 private:
-    std::vector<Sommet*> m_sommets;
-    std::vector<Arete*> m_aretes;
+    bool m_estOriente;
+    int m_poids;
+    std::vector< Sommet*> m_sommets;
+    std::vector< Aretes*> m_arrete;
 public:
-    Graphe(const std:: string cheminFichierGraphe);
+    Graphe(std:: string cheminFichierGraphe);
     ~Graphe();
     void afficher() const;
-    void triPoidsAretes();
-    void algoKruskal();
+    void Kruskal() ;
+    void Tri();
+    std::vector<int> BFS(int numero_S0) const;
+
 };
 
-#endif //TP5_GRAPHE_H
+#endif

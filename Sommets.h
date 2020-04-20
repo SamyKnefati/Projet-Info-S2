@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <vector>
-#include "arretes.h"
+#include "arete.h"
 
 class Sommet {
 private:

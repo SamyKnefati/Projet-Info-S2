@@ -1,11 +1,11 @@
-#ifndef PROJET_INFO_S2_ARRETES_H
-#define PROJET_INFO_S2_ARRETES_H
+#ifndef PROJET_INFO_S2_ARETE_H
+#define PROJET_INFO_S2_ARETE_H
 
 
 #include <iostream>
 #include "Sommets.h"
 
-class Arretes {
+class Aretes {
 
 private:
     int m_poids;
@@ -15,7 +15,7 @@ private:
 
 public:
 
-    Arretes (int D,int A ,int poids);
+    Aretes (int D,int A ,int poids);
     void afficherA() const;
     int Getpoids() const;
     int Getm_D() const;
