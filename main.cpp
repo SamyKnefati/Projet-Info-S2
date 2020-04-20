@@ -4,6 +4,8 @@
 
 #include <iostream>
 #include "Graphe.h"
+#include <allegro5/allegro.h>
+#include <windows.h>
 
 int main ()
 {
@@ -13,4 +15,23 @@ int main ()
     std::vector<int> arborescence;
     g.afficher();
     g.Tri();
+    assert(al_init());
+
+
+    ALLEGRO_DISPLAY*display= nullptr;
+
+    display= al_create_display(450,450);
+    bool quit= false;
+
+    while(!quit)
+    {
+        Sleep(5);
+        quit=true;
+
+
+    }
+
+    al_destroy_display(display);
+
+    return 0;
 }
