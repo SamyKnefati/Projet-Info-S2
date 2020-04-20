@@ -12,10 +12,11 @@ private:
     int m_D;
     int m_A;
     bool m_utilise;
+    std::string m_nomArete;
 
 public:
 
-    Aretes (int D,int A ,int poids);
+    Aretes (int D,int A ,int poids, std::string nomArete);
     void afficherA() const;
     int Getpoids() const;
     int Getm_D() const;

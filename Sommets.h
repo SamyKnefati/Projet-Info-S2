@@ -10,6 +10,7 @@ private:
     int m_numero;
     int m_utilise;
     std::vector<const Sommet*> m_successeurs;
+    std::string m_nomLieu;
 
 public:
     Sommet(int num);
@@ -19,6 +20,7 @@ public:
     void afficher() const;
     void Setutiliser();
     int Getutiliser();
+    void addName(std::string nomLieu);
 
 };
 

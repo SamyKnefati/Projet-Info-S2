@@ -3,10 +3,10 @@
 #include <iostream>
 #include "arete.h"
 
-Aretes::Aretes(int D, int A, int poids) : m_D{D}, m_A{A}, m_poids{poids}, m_utilise{false} {}
+Aretes::Aretes(int D, int A, int poids,std::string nomArete) : m_D{D}, m_A{A}, m_poids{poids}, m_utilise{false}, m_nomArete{nomArete} {}
 
 void Aretes::afficherA() const {
-    std::cout << "Arrete : " << m_D << "===>" << m_A << "        poids : " << m_poids;
+    std::cout << m_nomArete << " : " << m_D << "===>" << m_A << "        poids : " << m_poids;
 }
 
 

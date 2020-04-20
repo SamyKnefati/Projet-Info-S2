@@ -27,8 +27,9 @@ Graphe::Graphe(std::string cheminFichierGraphe) {
         m_sommets.push_back(new Sommet(i)); ///prends en compte le nombre de sommet dans le graphe
     }
     int num1, num2, num3;
+    std::string nomRue;
     for(int i=0; i<taille; i++){
-        ifs >> num1 >> num2 >> num3;
+        ifs >> num1 >> num2 >> num3 >> nomRue;
         if(ifs.fail()){
             throw std::runtime_error("Problème de lecture d'un arc/arrete et poids"); ///Execute au moment de l execution
         }
@@ -36,7 +37,16 @@ Graphe::Graphe(std::string cheminFichierGraphe) {
         if(!m_estOriente && num1 < num2) {
             m_sommets[num2]->addSuccesseur(m_sommets[num1]);
         }
-        m_arete.push_back(new Aretes(num1,num2,num3)); /// ajout d'arrete avec leur poids.
+        m_arete.push_back(new Aretes(num1,num2,num3,nomRue)); /// ajout de rue/avenue
+    }
+
+    std::string name;
+    for(int i=1; i<ordre+1; i++){
+        ifs >> name;
+        if(ifs.fail()){
+            throw std::runtime_error("Problème de lecture du nom du lieu"); ///Execute au moment de l execution
+        }
+        m_sommets[i]->addName(name);
     }
 
 }

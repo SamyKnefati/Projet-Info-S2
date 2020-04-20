@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include "Graphe.h"
-#include <allegro5/allegro.h>
+//#include <allegro5/allegro.h>
 #include <windows.h>
 
 int main ()
@@ -15,7 +15,7 @@ int main ()
     std::vector<int> arborescence;
     g.afficher();
     g.Tri();
-    assert(al_init());
+   /* assert(al_init());
 
 
     ALLEGRO_DISPLAY*display= nullptr;
@@ -31,7 +31,7 @@ int main ()
 
     }
 
-    al_destroy_display(display);
+    al_destroy_display(display);*/
 
     return 0;
 }

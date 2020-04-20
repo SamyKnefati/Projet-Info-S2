@@ -13,7 +13,7 @@ int Sommet::getNumero() const {
 
 void Sommet::afficher() const {
 
-    std::cout << "Sommets:" << m_numero<<"; ";
+    std::cout << "Sommets:" << m_numero<<" : "<< m_nomLieu << ";  ";
 
 }
 
@@ -31,4 +31,8 @@ int Sommet::Getutiliser()
 
     return m_utilise;
 
+}
+
+void Sommet::addName(std::string nomLieu) {
+m_nomLieu = nomLieu;
 }
