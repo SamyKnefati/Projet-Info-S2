@@ -12,7 +12,7 @@ private:
     bool m_estOriente;
     int m_poids;
     std::vector< Sommet*> m_sommets;
-    std::vector< Aretes*> m_arrete;
+    std::vector< Aretes*> m_arete;
 public:
     Graphe(std:: string cheminFichierGraphe);
     ~Graphe();

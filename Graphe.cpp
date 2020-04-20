@@ -36,7 +36,7 @@ Graphe::Graphe(std::string cheminFichierGraphe) {
         if(!m_estOriente && num1 < num2) {
             m_sommets[num2]->addSuccesseur(m_sommets[num1]);
         }
-        m_arrete.push_back(new Aretes(num1,num2,num3)); /// ajout d'arrete avec leur poids.
+        m_arete.push_back(new Aretes(num1,num2,num3)); /// ajout d'arrete avec leur poids.
     }
 
 }
@@ -45,7 +45,7 @@ Graphe::~Graphe() {
     for (auto addSommet: m_sommets) { ///chaque cases possèdes une adresse de sommets qui seront detruit
         delete addSommet;
     }
-    for (auto addArretes: m_arrete) {
+    for (auto addArretes: m_arete) {
         delete addArretes;
     }
 }
@@ -61,7 +61,7 @@ void Graphe::afficher() const {
     }
 
     std::cout <<std::endl<< "Liste des Arretes : " << std::endl;
-    for (auto addrArretes : m_arrete){
+    for (auto addrArretes : m_arete){
         addrArretes->afficherA();
         std::cout << std::endl;
     }
@@ -69,17 +69,17 @@ void Graphe::afficher() const {
 
 void::Graphe::Tri() {
 
-    for (int i = 0; i != m_arrete.size(); i++) {
-        for (int a = 0; a != (m_arrete.size() - 1); a++) {
-            if (m_arrete[a]->Getpoids() > m_arrete[a + 1]->Getpoids())
+    for (int i = 0; i != m_arete.size(); i++) {
+        for (int a = 0; a != (m_arete.size() - 1); a++) {
+            if (m_arete[a]->Getpoids() > m_arete[a + 1]->Getpoids())
             {
                 Aretes *inter;
 
-                inter = m_arrete[a];
+                inter = m_arete[a];
 
-                m_arrete[a] = m_arrete[a + 1];
+                m_arete[a] = m_arete[a + 1];
 
-                m_arrete[a + 1] = inter;
+                m_arete[a + 1] = inter;
 
             }
 
@@ -88,10 +88,10 @@ void::Graphe::Tri() {
     }
 
     std::cout<<std::endl<<"TRI PAR ORDRE CROISSANT"<<std::endl;
-    for(int i=0; i!=m_arrete.size();i++)
+    for(int i=0; i!=m_arete.size();i++)
     {
 
-        m_arrete[i]->afficherA();
+        m_arete[i]->afficherA();
         std::cout<<std::endl;
 
     }
