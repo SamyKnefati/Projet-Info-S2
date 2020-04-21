@@ -11,15 +11,15 @@ class Graphe {
 
 private:
     bool m_estOriente;
-    int m_poids;
+    int m_capaciteChemin;
     std::vector< Sommet*> m_sommets;
     std::vector< Aretes*> m_arete;
 public:
     Graphe(std:: string cheminFichierGraphe);
     ~Graphe();
     void afficher() const;
-    void Kruskal() ;
-    void Tri();
+    void kruskal() ;
+    void tri();
     std::vector<int> BFS(int numero_S0) const;
     void Allegro(ALLEGRO_FONT *font);
 };

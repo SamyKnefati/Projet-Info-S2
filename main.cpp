@@ -23,7 +23,7 @@ int main ()
     Graphe g{"../Graphe_NO"};
     std::vector<int> arborescence;
     g.afficher();
-    //g.Tri();
+    g.kruskal();
 
     g.Allegro(font);
 

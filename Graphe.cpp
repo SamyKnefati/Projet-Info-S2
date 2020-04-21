@@ -87,11 +87,11 @@ void Graphe::afficher() const {
     }
 }
 
-void::Graphe::Tri() {
+void::Graphe::tri() {
 
     for (int i = 0; i != m_arete.size(); i++) {
         for (int a = 0; a != (m_arete.size() - 1); a++) {
-            if (m_arete[a]->Getpoids() > m_arete[a + 1]->Getpoids())
+            if (m_arete[a]->GetCapacite() > m_arete[a + 1]->GetCapacite())
             {
                 Aretes *inter;
 
@@ -118,6 +118,89 @@ void::Graphe::Tri() {
 
 
 }
+
+
+
+void::Graphe::kruskal()  {
+    /// on trie les aretes
+
+    for (int i = 0; i != m_arete.size(); i++) {
+        for (int a = 0; a != (m_arete.size() - 1); a++) {
+            if (m_arete[a]->GetCapacite() > m_arete[a + 1]->GetCapacite())
+            {
+                Aretes *inter;
+
+                inter = m_arete[a];
+
+                m_arete[a] = m_arete[a + 1];
+
+                m_arete[a + 1] = inter;
+
+            }
+
+        }
+
+    }
+
+    std::cout<<std::endl<<"TRI PAR ORDRE CROISSANT"<<std::endl;
+    for(int i=0; i!=m_arete.size();i++)
+    {
+
+        m_arete[i]->afficherA();
+        std::cout<<std::endl;
+
+    }
+
+    ///tri effectue, on finalise kruskal
+
+    std::vector<const Aretes*>MST;
+    const Aretes* Arr;
+    int D,A;
+    m_capaciteChemin=0;
+
+    for(int i=0; i!=m_arete.size();i++)
+    {
+        Arr=m_arete[i];
+
+        m_sommets[Arr->Getm_D()]->Setutiliser();
+        m_sommets[Arr->Getm_A()]->Setutiliser();
+
+
+        D=m_sommets[Arr->Getm_D()]->Getutiliser();
+        A=m_sommets[Arr->Getm_A()]->Getutiliser();
+
+
+        if(A<=2 && D<=2){
+
+            MST.push_back(m_arete[i]);
+            m_capaciteChemin+=Arr->GetCapacite();
+
+        }
+        if( (A>2 && D<2) || (D>2 && A<2)){
+            MST.push_back(m_arete[i]);
+            m_capaciteChemin+=Arr->GetCapacite();
+        }
+    }
+
+
+    std::cout<<std::endl<<" Algorithme de Kruskal : "<<std::endl;
+
+    for(int i=0; i!=MST.size();i++)
+    {
+
+        MST[i]->afficherA();
+        std::cout<<std::endl;
+
+    }
+
+    std::cout<<std::endl;
+    std::cout<<" capacite Total : "<<m_capaciteChemin<<std::endl;
+
+
+
+}
+
+
 
 void Graphe::Allegro(ALLEGRO_FONT *font) {
 
