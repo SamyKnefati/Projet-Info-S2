@@ -32,10 +32,10 @@ Graphe::Graphe(std::string cheminFichierGraphe) {
     for(int i=0; i< ordre+1; i++){
         m_sommets.push_back(new Sommet(i)); ///prends en compte le nombre de sommet dans le graphe
     }
-    int num1, num2, num3;
+    int num1, num2, num3, type;
     std::string nomRue;
     for(int i=0; i<taille; i++){
-        ifs >> num1 >> num2 >> num3 >> nomRue;
+        ifs >> num1 >> num2 >> num3 >> nomRue>> type;
         if(ifs.fail()){
             throw std::runtime_error("Problème de lecture d'un arc/arrete et poids"); ///Execute au moment de l execution
         }
@@ -43,7 +43,7 @@ Graphe::Graphe(std::string cheminFichierGraphe) {
         if(!m_estOriente && num1 < num2) {
             m_sommets[num2]->addSuccesseur(m_sommets[num1]);
         }
-        m_arete.push_back(new Aretes(num1,num2,num3,nomRue)); /// ajout de rue/avenue
+        m_arete.push_back(new Aretes(num1,num2,num3,nomRue, type)); /// ajout de rue/avenue
     }
 
     std::string name;
@@ -157,18 +157,44 @@ void Graphe::Allegro(ALLEGRO_FONT *font) {
 
         }
 
-        al_draw_textf(font, al_map_rgb(255, 255, 255), 1000,500 / 2 - al_get_font_ascent(font),
-                      ALLEGRO_ALIGN_CENTER, "VOIES DE PASSAGE : ");
+        al_draw_textf(font, al_map_rgb(255, 0, 0), 1000, (550 ) / 2 - al_get_font_ascent(font),
+                      ALLEGRO_ALIGN_CENTER, "TRANSPORTS EN COMMUN :");
+
+        al_draw_textf(font, al_map_rgb(255, 0, 0), 1000, (750 ) / 2 - al_get_font_ascent(font),
+                      ALLEGRO_ALIGN_CENTER, "RUES :");
 
         for (int i = 0; i != m_arete.size(); i++) {
 
 
-            al_draw_textf(font, al_map_rgb(255, 0, 0), 1050, (550 + (i * 50)) / 2 - al_get_font_ascent(font),
-                          ALLEGRO_ALIGN_CENTER, "%s", m_arete[i]->GetName().c_str());
 
-            al_draw_line(m_sommets[m_arete[i]->Getm_D()]->GetX(),m_sommets[m_arete[i]->Getm_D()]->GetY(),
-                         m_sommets[m_arete[i]->Getm_A()]->GetX(),m_sommets[m_arete[i]->Getm_A()]->GetY(),
-                         al_map_rgb(0,0,0),10.0);
+            switch(m_arete[i]->GetmType())
+
+            {
+
+                case 0:
+
+                    al_draw_textf(font, al_map_rgb(255, 0, 0), 950, (550 + (i * 40)) / 2 - al_get_font_ascent(font),
+                                  ALLEGRO_ALIGN_CENTER, "%s", m_arete[i]->GetName().c_str());
+                    al_draw_line(m_sommets[m_arete[i]->Getm_D()]->GetX(),m_sommets[m_arete[i]->Getm_D()]->GetY(),
+                                 m_sommets[m_arete[i]->Getm_A()]->GetX(),m_sommets[m_arete[i]->Getm_A()]->GetY(),
+                                 al_map_rgb(255,0,0),10.0);
+                    break;
+                case 1:
+                    al_draw_textf(font, al_map_rgb(255, 0, 0), 950, (750 + (i * 40)) / 2 - al_get_font_ascent(font),
+                                  ALLEGRO_ALIGN_CENTER, "%s", m_arete[i]->GetName().c_str());
+                    al_draw_line(m_sommets[m_arete[i]->Getm_D()]->GetX(),m_sommets[m_arete[i]->Getm_D()]->GetY(),
+                                 m_sommets[m_arete[i]->Getm_A()]->GetX(),m_sommets[m_arete[i]->Getm_A()]->GetY(),
+                                 al_map_rgb(0,255,0),10.0);
+                    break;
+                case 2:
+                    al_draw_line(m_sommets[m_arete[i]->Getm_D()]->GetX(),m_sommets[m_arete[i]->Getm_D()]->GetY(),
+                                 m_sommets[m_arete[i]->Getm_A()]->GetX(),m_sommets[m_arete[i]->Getm_A()]->GetY(),
+                                 al_map_rgb(0,0,255),10.0);
+                    break;
+
+
+            }
+
 
         }
 
