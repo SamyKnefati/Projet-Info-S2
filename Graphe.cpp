@@ -87,39 +87,6 @@ void Graphe::afficher() const {
     }
 }
 
-void::Graphe::tri() {
-
-    for (int i = 0; i != m_arete.size(); i++) {
-        for (int a = 0; a != (m_arete.size() - 1); a++) {
-            if (m_arete[a]->GetCapacite() > m_arete[a + 1]->GetCapacite())
-            {
-                Aretes *inter;
-
-                inter = m_arete[a];
-
-                m_arete[a] = m_arete[a + 1];
-
-                m_arete[a + 1] = inter;
-
-            }
-
-        }
-
-    }
-
-    std::cout<<std::endl<<"TRI PAR ORDRE CROISSANT"<<std::endl;
-    for(int i=0; i!=m_arete.size();i++)
-    {
-
-        m_arete[i]->afficherA();
-        std::cout<<std::endl;
-
-    }
-
-
-}
-
-
 
 std::vector< const Aretes*> Graphe::kruskal()  {
     /// on trie les aretes
