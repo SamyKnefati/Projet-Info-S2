@@ -23,8 +23,10 @@ int main ()
     Graphe g{"../Graphe_NO"};
     std::vector<int> arborescence;
     g.afficher();
-    g.kruskal();
-    g.Allegro(font);
+
+    std::vector<const Aretes*> kruskal;
+    kruskal = g.kruskal();
+    g.Allegro(font, kruskal);
 
 
     return 0;
