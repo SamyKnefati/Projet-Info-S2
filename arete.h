@@ -21,6 +21,7 @@ public:
     int Getpoids() const;
     int Getm_D() const;
     int Getm_A() const;
+    std::string const GetName();
 };
 
 

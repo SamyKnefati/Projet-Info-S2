@@ -23,3 +23,10 @@ int Aretes::Getm_D() const {
 int Aretes::Getm_A() const {
     return m_A;
 }
+
+std::string const Aretes::GetName() {
+
+    return m_nomArete;
+
+
+}

@@ -3,6 +3,12 @@
 #include <fstream>
 #include <queue>
 #include <stack>
+#include <allegro5/allegro.h>
+#include <allegro5/allegro_image.h>
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_ttf.h>
+#include <allegro5/allegro_primitives.h>
+
 
 Graphe::Graphe(std::string cheminFichierGraphe) {
     std::ifstream ifs{cheminFichierGraphe};
@@ -41,12 +47,16 @@ Graphe::Graphe(std::string cheminFichierGraphe) {
     }
 
     std::string name;
+    int x,y;
     for(int i=1; i<ordre+1; i++){
-        ifs >> name;
+        ifs >> name >> x >> y;
+
+
         if(ifs.fail()){
             throw std::runtime_error("Problème de lecture du nom du lieu"); ///Execute au moment de l execution
         }
         m_sommets[i]->addName(name);
+        m_sommets[i]->addCoor(x,y);
     }
 
 }
@@ -107,4 +117,77 @@ void::Graphe::Tri() {
     }
 
 
+}
+
+void Graphe::Allegro(ALLEGRO_FONT *font) {
+
+
+    ALLEGRO_DISPLAY*display= nullptr;
+    ALLEGRO_MOUSE_STATE mouse;
+    ALLEGRO_BITMAP* map ;
+    ALLEGRO_EVENT_QUEUE *Queue;
+    bool isEnd;
+
+
+    al_set_target_backbuffer(display);
+    ALLEGRO_EVENT event={0};
+    display= al_create_display(1600,800);
+    std::cout<<"coucou"<<std::endl;
+    map = al_load_bitmap("../map.JPG");
+    font = al_load_ttf_font("../police.TTF", 30, 0);
+    Queue = al_create_event_queue();
+    al_set_target_backbuffer(display);
+    al_register_event_source(Queue,al_get_display_event_source(display));
+
+
+    while(isEnd != TRUE) {
+
+
+        al_draw_bitmap(map, 10, 0, 0);
+        al_draw_textf(font, al_map_rgb(255, 0, 127), 1200,100 / 2 - al_get_font_ascent(font),
+                ALLEGRO_ALIGN_CENTER, "Fete des lumieres 2021: ");
+        al_draw_textf(font, al_map_rgb(255, 255, 255), 900,200 / 2 - al_get_font_ascent(font),
+                      ALLEGRO_ALIGN_CENTER, "LIEUX: ");
+
+        for (int i = 1; i != m_sommets.size(); i++) {
+
+            al_draw_filled_circle(m_sommets[i]->GetX(),m_sommets[i]->GetY(),10,al_map_rgb(0,0,0));
+            al_draw_textf(font, al_map_rgb(255, 255, 255), 950,(200 +i*50) / 2 - al_get_font_ascent(font),
+                          ALLEGRO_ALIGN_CENTER, "%s", m_sommets[i]->GetName().c_str());
+
+        }
+
+        al_draw_textf(font, al_map_rgb(255, 255, 255), 1000,500 / 2 - al_get_font_ascent(font),
+                      ALLEGRO_ALIGN_CENTER, "VOIES DE PASSAGE : ");
+
+        for (int i = 0; i != m_arete.size(); i++) {
+
+
+            al_draw_textf(font, al_map_rgb(255, 0, 0), 1050, (550 + (i * 50)) / 2 - al_get_font_ascent(font),
+                          ALLEGRO_ALIGN_CENTER, "%s", m_arete[i]->GetName().c_str());
+
+            al_draw_line(m_sommets[m_arete[i]->Getm_D()]->GetX(),m_sommets[m_arete[i]->Getm_D()]->GetY(),
+                         m_sommets[m_arete[i]->Getm_A()]->GetX(),m_sommets[m_arete[i]->Getm_A()]->GetY(),
+                         al_map_rgb(0,0,0),10.0);
+
+        }
+
+
+        al_flip_display();
+
+        al_wait_for_event(Queue,&event);
+
+        if(event.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+        {
+            isEnd=TRUE;
+        }
+
+
+
+    }
+
+    al_destroy_display(display);
+    al_destroy_event_queue(Queue);
+    al_destroy_bitmap(map);
+    al_destroy_font(font);
 }

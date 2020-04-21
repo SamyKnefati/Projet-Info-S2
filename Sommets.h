@@ -8,6 +8,8 @@
 class Sommet {
 private:
     int m_numero;
+    int m_x;
+    int m_y;
     int m_utilise;
     std::vector<const Sommet*> m_successeurs;
     std::string m_nomLieu;
@@ -21,6 +23,10 @@ public:
     void Setutiliser();
     int Getutiliser();
     void addName(std::string nomLieu);
+    void addCoor(int x, int y);
+    int GetY();
+    int GetX();
+    std::string GetName();
 
 };
 

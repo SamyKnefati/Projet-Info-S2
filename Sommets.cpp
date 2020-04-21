@@ -11,9 +11,14 @@ int Sommet::getNumero() const {
     return m_numero;
 }
 
+std::string Sommet::GetName() {
+    return m_nomLieu;
+}
+
+
 void Sommet::afficher() const {
 
-    std::cout << "Sommets:" << m_numero<<" : "<< m_nomLieu << ";  ";
+    std::cout << "Sommets:" << m_numero<<" : "<< m_nomLieu <<" : "<<"COORS" << m_x<<";"<<m_y<<";  ";
 
 }
 
@@ -35,4 +40,25 @@ int Sommet::Getutiliser()
 
 void Sommet::addName(std::string nomLieu) {
 m_nomLieu = nomLieu;
+}
+
+
+
+void Sommet::addCoor(int x, int y) {
+   m_x = x;
+   m_y = y;
+}
+
+int Sommet::GetX()
+{
+
+    return m_x;
+
+}
+
+int Sommet::GetY()
+{
+
+    return m_y;
+
 }

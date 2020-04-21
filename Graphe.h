@@ -4,7 +4,8 @@
 #include <iostream>
 #include "Sommets.h"
 #include "arete.h"
-
+#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_ttf.h>
 
 class Graphe {
 
@@ -20,7 +21,7 @@ public:
     void Kruskal() ;
     void Tri();
     std::vector<int> BFS(int numero_S0) const;
-
+    void Allegro(ALLEGRO_FONT *font);
 };
 
 #endif
