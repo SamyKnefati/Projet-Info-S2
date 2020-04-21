@@ -121,7 +121,7 @@ void::Graphe::tri() {
 
 
 
-void::Graphe::kruskal()  {
+std::vector< const Aretes*> Graphe::kruskal()  {
     /// on trie les aretes
 
     for (int i = 0; i != m_arete.size(); i++) {
@@ -195,14 +195,14 @@ void::Graphe::kruskal()  {
 
     std::cout<<std::endl;
     std::cout<<" capacite Total : "<<m_capaciteChemin<<std::endl;
-
-
+    m_kruskal=MST;
+    return m_kruskal;
 
 }
 
 
 
-void Graphe::Allegro(ALLEGRO_FONT *font) {
+void Graphe::Allegro(ALLEGRO_FONT *font,std::vector< const Aretes*>&  kruskal ) {
 
 
     ALLEGRO_DISPLAY*display= nullptr;
@@ -214,7 +214,10 @@ void Graphe::Allegro(ALLEGRO_FONT *font) {
 
     al_set_target_backbuffer(display);
     ALLEGRO_EVENT event={0};
+
+
     display= al_create_display(1600,800);
+
     std::cout<<"coucou"<<std::endl;
     map = al_load_bitmap("../map.JPG");
     font = al_load_ttf_font("../police.TTF", 30, 0);
@@ -233,6 +236,7 @@ void Graphe::Allegro(ALLEGRO_FONT *font) {
                       ALLEGRO_ALIGN_CENTER, "LIEUX: ");
 
         for (int i = 1; i != m_sommets.size(); i++) {
+
 
             al_draw_filled_circle(m_sommets[i]->GetX(),m_sommets[i]->GetY(),10,al_map_rgb(0,0,0));
             al_draw_textf(font, al_map_rgb(255, 255, 255), 950,(200 +i*50) / 2 - al_get_font_ascent(font),
@@ -260,23 +264,34 @@ void Graphe::Allegro(ALLEGRO_FONT *font) {
                                   ALLEGRO_ALIGN_CENTER, "%s", m_arete[i]->GetName().c_str());
                     al_draw_line(m_sommets[m_arete[i]->Getm_D()]->GetX(),m_sommets[m_arete[i]->Getm_D()]->GetY(),
                                  m_sommets[m_arete[i]->Getm_A()]->GetX(),m_sommets[m_arete[i]->Getm_A()]->GetY(),
-                                 al_map_rgb(255,0,0),10.0);
+                                 al_map_rgb(255,0,0),5.0);
                     break;
                 case 1:
                     al_draw_textf(font, al_map_rgb(255, 0, 0), 950, (750 + (i * 40)) / 2 - al_get_font_ascent(font),
                                   ALLEGRO_ALIGN_CENTER, "%s", m_arete[i]->GetName().c_str());
                     al_draw_line(m_sommets[m_arete[i]->Getm_D()]->GetX(),m_sommets[m_arete[i]->Getm_D()]->GetY(),
                                  m_sommets[m_arete[i]->Getm_A()]->GetX(),m_sommets[m_arete[i]->Getm_A()]->GetY(),
-                                 al_map_rgb(0,255,0),10.0);
+                                 al_map_rgb(0,255,0),5.0);
                     break;
                 case 2:
                     al_draw_line(m_sommets[m_arete[i]->Getm_D()]->GetX(),m_sommets[m_arete[i]->Getm_D()]->GetY(),
                                  m_sommets[m_arete[i]->Getm_A()]->GetX(),m_sommets[m_arete[i]->Getm_A()]->GetY(),
-                                 al_map_rgb(0,0,255),10.0);
+                                 al_map_rgb(0,0,255),5.0);
                     break;
 
 
             }
+
+
+        }
+
+
+       for(int i=0; i != kruskal.size(); i++)
+        {
+
+            al_draw_line((m_sommets[kruskal[i]->Getm_D()]->GetX()),m_sommets[kruskal[i]->Getm_D()]->GetY(),
+                         (m_sommets[kruskal[i]->Getm_A()]->GetX()),m_sommets[kruskal[i]->Getm_A()]->GetY(),
+                         al_map_rgb(255,0,255),3.0);
 
 
         }
@@ -299,4 +314,35 @@ void Graphe::Allegro(ALLEGRO_FONT *font) {
     al_destroy_event_queue(Queue);
     al_destroy_bitmap(map);
     al_destroy_font(font);
+}
+
+std::vector<int> Graphe::BFS(int numero_S0) const {
+    ///Tous les sommets sont blancs nn decouverts
+    std::vector<int > couleurs((int) m_sommets.size(), 0);
+    ///Creer une file vide
+    std::queue<const Sommet*> file;
+    std::vector<int > predecesseurs((int) m_sommets.size(), -1);
+    ///Enfiler s0; s0 deviens gris
+    file.push(m_sommets[numero_S0]);
+    couleurs[numero_S0] = 1; // gris
+    const Sommet* s; /// On ne modifie pas l'adresse de s.
+    ///Tant que la file n'est pas vide
+    while(!file.empty()){
+        ///Defiler le prochain sommet s de la file
+        s = file.front();
+        file.pop();
+        ///Pour chaque successeur s' blanc non decourt de s:
+        for(auto succ: s->getSuccesseur()){
+            if(couleurs[succ->getNumero()] == 0){
+                ///Enfiler s'; s' deviens gris
+                file.push(succ);
+                couleurs[succ->getNumero()] = 1; // gris
+                ///Noter s est le predecesseur de s'
+                predecesseurs[succ->getNumero()] = s->getNumero();
+            }
+        }
+        couleurs[s-> getNumero()] = 2; //noir
+
+    }
+    return predecesseurs;
 }

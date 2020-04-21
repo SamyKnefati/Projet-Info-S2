@@ -14,14 +14,15 @@ private:
     int m_capaciteChemin;
     std::vector< Sommet*> m_sommets;
     std::vector< Aretes*> m_arete;
+    std::vector< const Aretes*>  m_kruskal;
 public:
     Graphe(std:: string cheminFichierGraphe);
     ~Graphe();
     void afficher() const;
-    void kruskal() ;
+    std::vector< const Aretes*> kruskal() ;
     void tri();
     std::vector<int> BFS(int numero_S0) const;
-    void Allegro(ALLEGRO_FONT *font);
+    void Allegro(ALLEGRO_FONT *font,std::vector< const Aretes*>&  kruskal );
 };
 
 #endif
