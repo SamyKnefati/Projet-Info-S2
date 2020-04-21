@@ -6,13 +6,14 @@
 #include "arete.h"
 
 class Sommet {
-private:
+public:
     int m_numero;
     int m_x;
     int m_y;
     int m_utilise;
     std::vector<const Sommet*> m_successeurs;
     std::string m_nomLieu;
+    int m_marque;
 
 public:
     Sommet(int num);
@@ -27,6 +28,7 @@ public:
     int GetY();
     int GetX();
     std::string GetName();
+    void marque(int n);
 
 };
 

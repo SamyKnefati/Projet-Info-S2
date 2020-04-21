@@ -313,3 +313,42 @@ std::vector<int> Graphe::BFS(int numero_S0) const {
     }
     return predecesseurs;
 }
+
+/*void Graphe::ford_fulkerson(int depart, int arrivee) {
+
+
+}*/
+
+
+void Graphe::DFS(int numero_S0,int &chaine) const {
+
+    static int date = 0;
+    static std::vector<int > couleurs((int) m_sommets.size(), 0);
+    static std::stack<const Sommet*> pile;
+    static std::vector<int> cc;
+    pile.push(m_sommets[numero_S0]); // est le sommet s
+    couleurs[numero_S0]=1;
+    std::cout<<numero_S0;
+    for (auto succ: m_sommets[numero_S0]->getSuccesseur()) {
+
+        if(couleurs[succ->getNumero()] == 1){
+            chaine = 1;
+        }
+
+        if (couleurs[succ->getNumero()] == 0) {
+            std::cout << " ----> ";
+            pile.push(m_sommets[succ->getNumero()]);
+            date += 1;
+            DFS(succ->getNumero(),chaine);
+        }
+    }
+    couleurs[numero_S0] = 2;
+}
+
+int Graphe::getMarque(int num) const {
+    return m_sommets[num]->m_marque;
+}
+
+bool Graphe::getOriente() const {
+    return m_estOriente;
+}

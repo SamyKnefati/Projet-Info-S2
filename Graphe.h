@@ -15,14 +15,19 @@ private:
     std::vector< Sommet*> m_sommets;
     std::vector< Aretes*> m_arete;
     std::vector< const Aretes*>  m_kruskal;
+
 public:
     Graphe(std:: string cheminFichierGraphe);
     ~Graphe();
     void afficher() const;
+    std::vector<int> BFS(int numero_S0) const;
+    void DFS(int numero_S0, int &chaine) const;
+    bool getOriente() const;
     std::vector< const Aretes*> kruskal() ;
     void tri();
-    std::vector<int> BFS(int numero_S0) const;
     void Allegro(ALLEGRO_FONT *font,std::vector< const Aretes*>&  kruskal );
+    //void ford_fulkerson(int depart, int arrivee);
+    int getMarque(int num) const;
 };
 
 #endif

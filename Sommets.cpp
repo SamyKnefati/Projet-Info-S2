@@ -2,7 +2,7 @@
 
 
 
-Sommet::Sommet(int num) : m_numero{num}, m_utilise{false}{}
+Sommet::Sommet(int num) : m_numero{num}, m_utilise{false}, m_marque{0}{}
 
 void Sommet::addSuccesseur(const Sommet *succ) {
     m_successeurs.push_back(succ);
@@ -61,4 +61,8 @@ int Sommet::GetY()
 
     return m_y;
 
+}
+
+void Sommet::marque(int n) {
+    m_marque += n;
 }
