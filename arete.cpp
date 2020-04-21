@@ -7,7 +7,7 @@ Aretes::Aretes(int D, int A, int poids,std::string nomArete, int type) : m_D{D},
 m_type{type} {}
 
 void Aretes::afficherA() const {
-    std::cout << m_nomArete << " : " << m_D << "===>" << m_A << "        poids : " << m_capacite<< "    type:"<<m_type;
+    std::cout << m_nomArete << " : " << m_D << "===>" << m_A << "        capacite : " << m_capacite<< "    type:"<<m_type;
 }
 
 
