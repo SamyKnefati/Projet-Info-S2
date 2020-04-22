@@ -32,10 +32,10 @@ Graphe::Graphe(std::string cheminFichierGraphe) {
     for(int i=0; i< ordre+1; i++){
         m_sommets.push_back(new Sommet(i)); ///prends en compte le nombre de sommet dans le graphe
     }
-    int num1, num2, num3, type;
+    int num1, num2, num3, type, distance;
     std::string nomRue;
     for(int i=0; i<taille; i++){
-        ifs >> num1 >> num2 >> num3 >> nomRue>> type;
+        ifs >> num1 >> num2 >> num3 >> nomRue>> type >> distance;
         if(ifs.fail()){
             throw std::runtime_error("Problème de lecture d'un arc/arrete et poids"); ///Execute au moment de l execution
         }
@@ -43,7 +43,7 @@ Graphe::Graphe(std::string cheminFichierGraphe) {
         if(!m_estOriente && num1 < num2) {
             m_sommets[num2]->addSuccesseur(m_sommets[num1]);
         }
-        m_arete.push_back(new Aretes(num1,num2,num3,nomRue, type)); /// ajout de rue/avenue
+        m_arete.push_back(new Aretes(num1,num2,num3,nomRue, type, distance)); /// ajout de rue/avenue
     }
 
     std::string name;
@@ -88,7 +88,7 @@ void Graphe::afficher() const {
 }
 
 
-void Graphe::kruskal()  {
+void Graphe::kruskalCapacite()  {
     /// on trie les aretes
 
     for (int i = 0; i != m_arete.size(); i++) {
@@ -147,8 +147,12 @@ void Graphe::kruskal()  {
             MST.push_back(m_arete[i]);
             m_capaciteChemin+=Arr->GetCapacite();
         }
+
+        m_sommets[Arr->Getm_D()]->RemiseZero();
+        m_sommets[Arr->Getm_A()]->RemiseZero();
+
     }
-    m_kruskal=MST;
+    m_KruskalCpacite=MST;
 
     std::cout<<std::endl<<" Algorithme de Kruskal : "<<std::endl;
 
@@ -164,9 +168,88 @@ void Graphe::kruskal()  {
     std::cout<<" capacite Total : "<<m_capaciteChemin<<std::endl;
 }
 
+void Graphe::kruskalCommunication()  {
+    /// on trie les aretes
+
+    for (int i = 0; i != m_arete.size(); i++) {
+        for (int a = 0; a != (m_arete.size() - 1); a++) {
+            if (m_arete[a]->Getdistance() > m_arete[a + 1]->Getdistance())
+            {
+                Aretes *inter;
+
+                inter = m_arete[a];
+
+                m_arete[a] = m_arete[a + 1];
+
+                m_arete[a + 1] = inter;
+
+            }
+
+        }
+
+    }
+
+    std::cout<<std::endl<<"TRI PAR ORDRE CROISSANT"<<std::endl;
+    for(int i=0; i!=m_arete.size();i++)
+    {
+
+        m_arete[i]->afficherA();
+        std::cout<<std::endl;
+
+    }
+
+    ///tri effectue, on finalise kruskal
+
+    std::vector<const Aretes*>MST;
+    const Aretes* Arr;
+    int D,A;
+    m_DistanceCable=0;
+
+    for(int i=0; i!=m_arete.size();i++)
+    {
+        Arr=m_arete[i];
+
+        m_sommets[Arr->Getm_D()]->Setutiliser();
+        m_sommets[Arr->Getm_A()]->Setutiliser();
 
 
-void Graphe::Allegro(std::vector< const Aretes*>&  kruskal ) {
+        D=m_sommets[Arr->Getm_D()]->Getutiliser();
+        A=m_sommets[Arr->Getm_A()]->Getutiliser();
+
+
+        if(A<=2 && D<=2){
+
+            MST.push_back(m_arete[i]);
+            m_DistanceCable+=Arr->Getdistance();
+
+        }
+        if( (A>2 && D<2) || (D>2 && A<2)){
+            MST.push_back(m_arete[i]);
+            m_DistanceCable+=Arr->Getdistance();
+        }
+
+        m_sommets[Arr->Getm_D()]->RemiseZero();
+        m_sommets[Arr->Getm_A()]->RemiseZero();
+    }
+    m_KruskalDistance=MST;
+
+    std::cout<<std::endl<<" Algorithme de Kruskal : "<<std::endl;
+
+    for(int i=0; i!=MST.size();i++)
+    {
+
+        MST[i]->afficherA();
+        std::cout<<std::endl;
+
+    }
+
+    std::cout<<std::endl;
+    std::cout<<" distance de cable totale : "<<m_DistanceCable<<std::endl;
+}
+
+
+
+void Graphe::Allegro() {
 
 
     ALLEGRO_DISPLAY*display= nullptr;
@@ -207,18 +290,13 @@ void Graphe::Allegro(std::vector< const Aretes*>&  kruskal ) {
         al_draw_textf(font, al_map_rgb(0, 0, 255), 1400,350,
                       ALLEGRO_ALIGN_CENTER, " ---: PONTS ");
 
+        al_draw_textf(font, al_map_rgb(255, 255, 255), 1200,750,
+                      ALLEGRO_ALIGN_CENTER, "  Capacite totale d'acceuil  : %d vistieurs ", m_capaciteChemin);
+
+        al_draw_textf(font, al_map_rgb(255, 255, 255), 1200,700,
+                      ALLEGRO_ALIGN_CENTER, "  Distance cable de communication  : %d m ", m_DistanceCable);
 
 
-        for (int i = 1; i != m_sommets.size(); i++) {
-
-
-            al_draw_filled_circle(m_sommets[i]->GetX(),m_sommets[i]->GetY(),10,al_map_rgb(255,255,255));
-
-
-            al_draw_textf(font, al_map_rgb(255, 255, 255), m_sommets[i]->GetX()+110,m_sommets[i]->GetY() ,
-                          ALLEGRO_ALIGN_CENTER, "%s", m_sommets[i]->GetName().c_str());
-
-        }
 
 
         for (int i = 0; i != m_arete.size(); i++) {
@@ -234,17 +312,17 @@ void Graphe::Allegro(std::vector< const Aretes*>&  kruskal ) {
 
                     al_draw_line(m_sommets[m_arete[i]->Getm_D()]->GetX(),m_sommets[m_arete[i]->Getm_D()]->GetY(),
                                  m_sommets[m_arete[i]->Getm_A()]->GetX(),m_sommets[m_arete[i]->Getm_A()]->GetY(),
-                                 al_map_rgb(255,0,0),5.0);
+                                 al_map_rgb(255,0,0),15.0);
                     break;
                 case 1:
                     al_draw_line(m_sommets[m_arete[i]->Getm_D()]->GetX(),m_sommets[m_arete[i]->Getm_D()]->GetY(),
                                  m_sommets[m_arete[i]->Getm_A()]->GetX(),m_sommets[m_arete[i]->Getm_A()]->GetY(),
-                                 al_map_rgb(0,255,0),5.0);
+                                 al_map_rgb(0,255,0),15.0);
                     break;
                 case 2:
                     al_draw_line(m_sommets[m_arete[i]->Getm_D()]->GetX(),m_sommets[m_arete[i]->Getm_D()]->GetY(),
                                  m_sommets[m_arete[i]->Getm_A()]->GetX(),m_sommets[m_arete[i]->Getm_A()]->GetY(),
-                                 al_map_rgb(0,0,255),5.0);
+                                 al_map_rgb(0,0,255),15.0);
                     break;
 
 
@@ -254,16 +332,36 @@ void Graphe::Allegro(std::vector< const Aretes*>&  kruskal ) {
         }
 
 
-       for(int i=0; i != kruskal.size(); i++)
+       for(int i=0; i != m_KruskalCpacite.size(); i++)
         {
 
-            al_draw_line((m_sommets[kruskal[i]->Getm_D()]->GetX()),m_sommets[kruskal[i]->Getm_D()]->GetY(),
-                         (m_sommets[kruskal[i]->Getm_A()]->GetX()),m_sommets[kruskal[i]->Getm_A()]->GetY(),
-                         al_map_rgb(255,0,255),3.0);
+            al_draw_line((m_sommets[m_KruskalCpacite[i]->Getm_D()]->GetX()),m_sommets[m_KruskalCpacite[i]->Getm_D()]->GetY(),
+                         (m_sommets[m_KruskalCpacite[i]->Getm_A()]->GetX()),m_sommets[m_KruskalCpacite[i]->Getm_A()]->GetY(),
+                         al_map_rgb(255,255,255),10.0);
 
 
         }
 
+        for(int i=0; i != m_KruskalDistance.size(); i++)
+        {
+
+            al_draw_line((m_sommets[m_KruskalDistance[i]->Getm_D()]->GetX()),m_sommets[m_KruskalDistance[i]->Getm_D()]->GetY(),
+                         (m_sommets[m_KruskalDistance[i]->Getm_A()]->GetX()),m_sommets[m_KruskalDistance[i]->Getm_A()]->GetY(),
+                         al_map_rgb(255,100,255),5.0);
+
+
+        }
+
+        for (int i = 1; i != m_sommets.size(); i++) {
+
+
+            al_draw_filled_circle(m_sommets[i]->GetX(),m_sommets[i]->GetY(),10,al_map_rgb(255,255,255));
+
+
+            al_draw_textf(font, al_map_rgb(255, 255, 255), m_sommets[i]->GetX()+110,m_sommets[i]->GetY() ,
+                          ALLEGRO_ALIGN_CENTER, "%s", m_sommets[i]->GetName().c_str());
+
+        }
 
         al_flip_display();
 

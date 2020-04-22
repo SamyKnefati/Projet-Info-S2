@@ -23,6 +23,7 @@ public:
     void afficher() const;
     void Setutiliser();
     int Getutiliser();
+    void RemiseZero();
     void addName(std::string nomLieu);
     void addCoor(int x, int y);
     int GetY();

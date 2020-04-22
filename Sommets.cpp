@@ -31,6 +31,11 @@ void Sommet::Setutiliser()
     m_utilise+=1;
 }
 
+void Sommet::RemiseZero()
+{
+    m_utilise=0;
+}
+
 int Sommet::Getutiliser()
 {
 

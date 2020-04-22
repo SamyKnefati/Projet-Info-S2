@@ -19,7 +19,7 @@ private:
 
 public:
 
-    Aretes (int D,int A ,int poids, std::string nomArete, int type);
+    Aretes (int D,int A ,int poids, std::string nomArete, int type, int distance);
     void afficherA() const;
     int GetCapacite() const;
     int Getm_D() const;

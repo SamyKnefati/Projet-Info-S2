@@ -15,7 +15,8 @@ private:
     int m_DistanceCable;
     std::vector< Sommet*> m_sommets;
     std::vector< Aretes*> m_arete;
-    std::vector< const Aretes*>  m_kruskal;
+    std::vector< const Aretes*>  m_KruskalCpacite;
+    std::vector< const Aretes*>  m_KruskalDistance;
 
 public:
     Graphe(std:: string cheminFichierGraphe);
@@ -24,9 +25,10 @@ public:
     std::vector<int> BFS(int numero_S0) const;
     void DFS(int numero_S0, int &chaine) const;
     bool getOriente() const;
-    void kruskal() ;
+    void kruskalCapacite() ;
+    void kruskalCommunication() ;
     void tri();
-    void Allegro(std::vector< const Aretes*>&  kruskal );
+    void Allegro();
     //void ford_fulkerson(int depart, int arrivee);
     int getMarque(int num) const;
 };

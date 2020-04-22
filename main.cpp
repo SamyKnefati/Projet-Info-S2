@@ -71,10 +71,11 @@ int main ()
                 g.DFS(s0, chaine);
                 break;
             case 3:
-                g.kruskal();
+                g.kruskalCapacite();
+                g.kruskalCommunication();
                 break;
             case 4:
-                g.Allegro(kruskal);
+                g.Allegro();
                 break;
             case 5:
                 fin = 1;
