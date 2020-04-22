@@ -36,7 +36,7 @@ int main ()
     al_init_font_addon();
     al_init_ttf_addon();
     al_init_primitives_addon();
-    ALLEGRO_FONT *font;
+
 
     /// initialisation du graphe et des valeurs pour notre graphe
     size_t s0 = 0;
@@ -74,7 +74,7 @@ int main ()
                 g.kruskal();
                 break;
             case 4:
-                g.Allegro(font, kruskal);
+                g.Allegro(kruskal);
                 break;
             case 5:
                 fin = 1;

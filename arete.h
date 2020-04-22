@@ -11,6 +11,7 @@ private:
     int m_capacite;
     int m_D;
     int m_A;
+    int m_distance;
     bool m_utilise;
     int m_type;
     std::string m_nomArete;
@@ -24,6 +25,7 @@ public:
     int Getm_D() const;
     int Getm_A() const;
     int GetmType() const;
+    int Getdistance() const;
     std::string const GetName();
 };
 

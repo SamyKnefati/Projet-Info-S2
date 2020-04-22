@@ -35,3 +35,9 @@ std::string const Aretes::GetName() {
 int Aretes::GetmType() const {
     return m_type;
 }
+
+int Aretes::Getdistance() const {
+
+    return m_distance;
+
+}

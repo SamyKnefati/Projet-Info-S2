@@ -166,13 +166,15 @@ void Graphe::kruskal()  {
 
 
 
-void Graphe::Allegro(ALLEGRO_FONT *font,std::vector< const Aretes*>&  kruskal ) {
+void Graphe::Allegro(std::vector< const Aretes*>&  kruskal ) {
 
 
     ALLEGRO_DISPLAY*display= nullptr;
     ALLEGRO_MOUSE_STATE mouse;
-    ALLEGRO_BITMAP* map ;
+    //ALLEGRO_BITMAP* map ;
     ALLEGRO_EVENT_QUEUE *Queue;
+    ALLEGRO_FONT *font;
+    ALLEGRO_FONT *font2;
     bool isEnd;
 
 
@@ -181,10 +183,9 @@ void Graphe::Allegro(ALLEGRO_FONT *font,std::vector< const Aretes*>&  kruskal ) 
 
 
     display= al_create_display(1600,800);
-
-    std::cout<<"coucou"<<std::endl;
-    map = al_load_bitmap("../map.JPG");
+   // map = al_load_bitmap("../map.JPG");
     font = al_load_ttf_font("../police.TTF", 30, 0);
+    font2 = al_load_ttf_font("../police.TTF", 60, 0);
     Queue = al_create_event_queue();
     al_set_target_backbuffer(display);
     al_register_event_source(Queue,al_get_display_event_source(display));
@@ -193,26 +194,32 @@ void Graphe::Allegro(ALLEGRO_FONT *font,std::vector< const Aretes*>&  kruskal ) 
     while(isEnd != TRUE) {
 
 
-        al_draw_bitmap(map, 10, 0, 0);
-        al_draw_textf(font, al_map_rgb(255, 0, 127), 1200,100 / 2 - al_get_font_ascent(font),
+       // al_draw_bitmap(map, 10, 0, 0);
+        al_draw_textf(font2, al_map_rgb(255, 255, 255), 1200,100 / 2 - al_get_font_ascent(font),
                 ALLEGRO_ALIGN_CENTER, "Fete des lumieres 2021: ");
-        al_draw_textf(font, al_map_rgb(255, 255, 255), 900,200 / 2 - al_get_font_ascent(font),
-                      ALLEGRO_ALIGN_CENTER, "LIEUX: ");
+        al_draw_textf(font, al_map_rgb(255, 255, 255), 1400,200,
+                      ALLEGRO_ALIGN_CENTER, " : LIEUX ");
+        al_draw_filled_circle(1330,213,10,al_map_rgb(255,255,255));
+        al_draw_textf(font, al_map_rgb(255, 0, 0), 1400,250,
+                      ALLEGRO_ALIGN_CENTER, " ---: TRANSPORTS EN COMMUN ");
+        al_draw_textf(font, al_map_rgb(0, 255, 0), 1400,300,
+                      ALLEGRO_ALIGN_CENTER, " ---: RUES ");
+        al_draw_textf(font, al_map_rgb(0, 0, 255), 1400,350,
+                      ALLEGRO_ALIGN_CENTER, " ---: PONTS ");
+
+
 
         for (int i = 1; i != m_sommets.size(); i++) {
 
 
-            al_draw_filled_circle(m_sommets[i]->GetX(),m_sommets[i]->GetY(),10,al_map_rgb(0,0,0));
-            al_draw_textf(font, al_map_rgb(255, 255, 255), 950,(200 +i*50) / 2 - al_get_font_ascent(font),
+            al_draw_filled_circle(m_sommets[i]->GetX(),m_sommets[i]->GetY(),10,al_map_rgb(255,255,255));
+
+
+            al_draw_textf(font, al_map_rgb(255, 255, 255), m_sommets[i]->GetX()+110,m_sommets[i]->GetY() ,
                           ALLEGRO_ALIGN_CENTER, "%s", m_sommets[i]->GetName().c_str());
 
         }
 
-        al_draw_textf(font, al_map_rgb(255, 0, 0), 1000, (550 ) / 2 - al_get_font_ascent(font),
-                      ALLEGRO_ALIGN_CENTER, "TRANSPORTS EN COMMUN :");
-
-        al_draw_textf(font, al_map_rgb(255, 0, 0), 1000, (750 ) / 2 - al_get_font_ascent(font),
-                      ALLEGRO_ALIGN_CENTER, "RUES :");
 
         for (int i = 0; i != m_arete.size(); i++) {
 
@@ -224,15 +231,12 @@ void Graphe::Allegro(ALLEGRO_FONT *font,std::vector< const Aretes*>&  kruskal ) 
 
                 case 0:
 
-                    al_draw_textf(font, al_map_rgb(255, 0, 0), 950, (550 + (i * 40)) / 2 - al_get_font_ascent(font),
-                                  ALLEGRO_ALIGN_CENTER, "%s", m_arete[i]->GetName().c_str());
+
                     al_draw_line(m_sommets[m_arete[i]->Getm_D()]->GetX(),m_sommets[m_arete[i]->Getm_D()]->GetY(),
                                  m_sommets[m_arete[i]->Getm_A()]->GetX(),m_sommets[m_arete[i]->Getm_A()]->GetY(),
                                  al_map_rgb(255,0,0),5.0);
                     break;
                 case 1:
-                    al_draw_textf(font, al_map_rgb(255, 0, 0), 950, (750 + (i * 40)) / 2 - al_get_font_ascent(font),
-                                  ALLEGRO_ALIGN_CENTER, "%s", m_arete[i]->GetName().c_str());
                     al_draw_line(m_sommets[m_arete[i]->Getm_D()]->GetX(),m_sommets[m_arete[i]->Getm_D()]->GetY(),
                                  m_sommets[m_arete[i]->Getm_A()]->GetX(),m_sommets[m_arete[i]->Getm_A()]->GetY(),
                                  al_map_rgb(0,255,0),5.0);
@@ -276,8 +280,9 @@ void Graphe::Allegro(ALLEGRO_FONT *font,std::vector< const Aretes*>&  kruskal ) 
 
     al_destroy_display(display);
     al_destroy_event_queue(Queue);
-    al_destroy_bitmap(map);
+    //al_destroy_bitmap(map);
     al_destroy_font(font);
+    al_destroy_font(font2);
 }
 
 std::vector<int> Graphe::BFS(int numero_S0) const {
