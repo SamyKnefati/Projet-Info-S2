@@ -471,7 +471,7 @@ std::vector<int> Graphe::dijkstra(int s0) const {
         int s = 0;
         int distanceMini = std::numeric_limits<int>::max();
         std::cout << std::endl << std::endl;
-        for (size_t i = 0; i < distances.size(); i++) {
+        for (size_t i = 1; i < distances.size(); i++) {
             std::cout << couleurs[i] << " "
                       << ((distances[i] == std::numeric_limits<int>::max()) ? "Inf" : std::to_string(
                               distances[i])) << " "
