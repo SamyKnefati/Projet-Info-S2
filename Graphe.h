@@ -27,7 +27,7 @@ public:
     bool getOriente() const;
     void kruskalCapacite() ;
     void kruskalCommunication() ;
-    void tri();
+    std::vector<int> dijkstra(int s0) const;
     void Allegro();
     //void ford_fulkerson(int depart, int arrivee);
     int getMarque(int num) const;

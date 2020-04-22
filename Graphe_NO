@@ -1,10 +1,13 @@
 0
 5
-4
+7
 1 2 500 Rue_de_la_republique 1 950
-3 2 50 Metro_A 0 500
-4 1 200 Pont_Bonaparte 2 950
-5 4 200 Finiculaire 0 50
+1 3  200 Pont_Bonaparte 2 950
+2 3 50 Metro_A 0 500
+2 4 2000 xxx 2 850
+2 5 140 xxx 2 850
+3 5 20 xxxx 2 560
+4 5 200 Finiculaire 0 50
 Bellecour 500 670
 Cordeliers 660 360
 Hotel_De_Ville 600 150

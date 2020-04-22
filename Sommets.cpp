@@ -71,3 +71,15 @@ int Sommet::GetY()
 void Sommet::marque(int n) {
     m_marque += n;
 }
+
+const std::vector<std::pair<Sommet *const, int>> &Sommet::getSuccesseurs() const {
+    return m_successeurS;
+}
+
+int Sommet::getId() const {
+    return m_numero;
+}
+
+void Sommet::addSuccesseuS(Sommet *successeur, int poids) {
+    m_successeurS.emplace_back(successeur, poids);
+}

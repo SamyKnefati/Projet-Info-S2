@@ -53,7 +53,7 @@ int main ()
     int menu = 0;
     while(fin!=1){
         std::cout<< "veuillez choisir une option : " << std::endl;
-        std::cout<< "1) parcours BFS   2) parcours DFS   3) algorithme de kruskal   4) afficher la carte   5) quitter le simulateur " << std::endl;
+        std::cout<< "1) parcours BFS   2) parcours DFS   3) algorithme de kruskal   4) afficher la carte   5) Dijsktra  6) quitter le simulateur " << std::endl;
         std::cin>>menu;
         switch(menu){
             case 1:
@@ -77,7 +77,15 @@ int main ()
             case 4:
                 g.Allegro();
                 break;
+
             case 5:
+                std::cout << "Dijstkra: Veuillez saisir le numero du sommet initial : ";
+                s0=1;
+                arborescence=g.dijkstra(s0);
+                afficherParcours(s0,arborescence);
+
+                break;
+            case 6:
                 fin = 1;
                 break;
             default:
