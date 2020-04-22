@@ -542,3 +542,38 @@ std::vector<int> Graphe::dijkstra(int s0) {
 
 
 }
+
+void Graphe::ford_fulkerson() const {
+    std::vector<const Aretes*>MST;
+    const Aretes* Arr;
+    int D,A;
+    int flot = 0;
+    int flotTot = 0;
+
+    for(int i=0; i!=m_arete.size();i++)
+    {
+        Arr=m_arete[i];
+        int flot2 = 0;
+        int flotTot2 = 0;
+        int augmentable = 0;///pour savoir si un chemain est augmentant on pourrait essayer de stocker la possibilite d'augmentation dans un tableau et ensuite retourner la plus petite valeur pour laquelle on a pas de flot qui sature
+        std::string name;
+
+        name = Arr->GetName();
+        flot += Arr->getFlot();
+        flotTot += Arr->getFlotMax();
+
+        flot2 = Arr->getFlot();
+        flotTot2 = Arr->getFlotMax();
+
+        if(flot2 >= flotTot2){
+            std::cout<< name << "est sature" << std::endl;
+        }
+        if(flot2 < flotTot2){
+            augmentable = flotTot2 - flot2;
+            std::cout<< name << " est augmentable de : " << augmentable << std::endl;
+        }
+    }
+    std::cout << "dans la zone, le nombre de personnes total pouvant se deplacer sur les routes, avenues ponts ou metro est de :" << flotTot << "personnes" << std::endl;
+    std::cout << "le nombre de personnes totale circulant est de :" << flot << std::endl;
+}
+

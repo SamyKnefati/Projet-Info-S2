@@ -31,7 +31,7 @@ public:
     std::vector<int> dijkstra(int s0);
     void Allegro(int a);
     int getMarque(int num) const;
-    void testGeneral() const;
+    void ford_fulkerson() const ;
 };
 
 #endif

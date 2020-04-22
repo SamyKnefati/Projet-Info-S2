@@ -25,7 +25,7 @@ int Aretes::Getm_A() const {
     return m_A;
 }
 
-std::string const Aretes::GetName() {
+std::string Aretes::GetName() const {
 
     return m_nomArete;
 
@@ -40,4 +40,12 @@ int Aretes::Getdistance() const {
 
     return m_distance;
 
+}
+
+int Aretes::getFlotMax() const {
+    return m_flotTot;
+}
+
+int Aretes::getFlot() const {
+    return m_flot;
 }

@@ -27,7 +27,9 @@ public:
     int Getm_A() const;
     int GetmType() const;
     int Getdistance() const;
-    std::string const GetName();
+    int getFlotMax() const;
+    int getFlot() const ;
+    std::string GetName() const ;
 };
 
 
