@@ -29,8 +29,8 @@ public:
     void kruskalCommunication() ;
     std::vector<int> dijkstra(int s0) const;
     void Allegro();
-    //void ford_fulkerson(int depart, int arrivee);
     int getMarque(int num) const;
+    void testGeneral() const;
 };
 
 #endif

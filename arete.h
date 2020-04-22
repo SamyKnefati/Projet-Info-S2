@@ -15,11 +15,12 @@ private:
     bool m_utilise;
     int m_type;
     std::string m_nomArete;
+    int m_flotTot;
     int m_flot;
 
 public:
 
-    Aretes (int D,int A ,int poids, std::string nomArete, int type, int distance);
+    Aretes (int D,int A ,int poids, std::string nomArete, int type, int distance, int flotTot, int flot);
     void afficherA() const;
     int GetCapacite() const;
     int Getm_D() const;

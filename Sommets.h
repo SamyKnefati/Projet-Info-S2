@@ -15,7 +15,8 @@ public:
     std::string m_nomLieu;
     std::vector<std::pair<Sommet *const, int>> m_successeurS;
     int m_marque;
-    int m_id;
+    int m_nbPersMcarre;
+    int m_nbPersMcarreTot;
 
 public:
     Sommet(int num);
@@ -35,7 +36,8 @@ public:
     int getId() const;
     std::string GetName();
     void marque(int n);
-
+    void addNbPersMcarre(int nbPersMcarre);
+    void addNbPersMcarreTot(int nbPersMcarreTot);
 };
 
 #endif

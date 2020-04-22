@@ -2,7 +2,7 @@
 
 
 
-Sommet::Sommet(int num) : m_numero{num}, m_utilise{false}, m_marque{0}{}
+Sommet::Sommet(int num) : m_numero{num}, m_utilise{false}, m_marque{0} {}
 
 void Sommet::addSuccesseur(const Sommet *succ) {
     m_successeurs.push_back(succ);
@@ -83,3 +83,12 @@ int Sommet::getId() const {
 void Sommet::addSuccesseuS(Sommet *successeur, int poids) {
     m_successeurS.emplace_back(successeur, poids);
 }
+
+void Sommet::addNbPersMcarre(int nbPersMcarre) {
+    m_nbPersMcarre = nbPersMcarre;
+}
+
+void Sommet::addNbPersMcarreTot(int nbPersMcarreTot) {
+ m_nbPersMcarreTot = nbPersMcarreTot;
+}
+

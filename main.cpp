@@ -27,6 +27,7 @@ void afficherParcours(size_t s0, const std::vector<int>& predecesseur){
 }
 
 
+
 int main ()
 {
     ///partie allegro initialisation
@@ -52,6 +53,7 @@ int main ()
     int chaine = 0;
     int menu = 0;
     while(fin!=1){
+
         std::cout<< "veuillez choisir une option : " << std::endl;
         std::cout<< "1) parcours BFS   2) parcours DFS   3) algorithme de kruskal   4) afficher la carte   5) Dijsktra  6) quitter le simulateur " << std::endl;
         std::cin>>menu;
