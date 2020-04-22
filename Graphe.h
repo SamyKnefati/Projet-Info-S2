@@ -11,12 +11,13 @@ class Graphe {
 
 private:
     bool m_estOriente;
-    int m_capaciteChemin;
-    int m_DistanceCable;
+    int m_capaciteChemin=0;
+    int m_DistanceCable=0;
     std::vector< Sommet*> m_sommets;
     std::vector< Aretes*> m_arete;
     std::vector< const Aretes*>  m_KruskalCpacite;
     std::vector< const Aretes*>  m_KruskalDistance;
+    std::vector<int> m_Dijkstra;
 
 public:
     Graphe(std:: string cheminFichierGraphe);
@@ -27,8 +28,8 @@ public:
     bool getOriente() const;
     void kruskalCapacite() ;
     void kruskalCommunication() ;
-    std::vector<int> dijkstra(int s0) const;
-    void Allegro();
+    std::vector<int> dijkstra(int s0);
+    void Allegro(int a);
     int getMarque(int num) const;
     void testGeneral() const;
 };

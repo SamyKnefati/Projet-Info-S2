@@ -41,6 +41,7 @@ int main ()
 
     /// initialisation du graphe et des valeurs pour notre graphe
     size_t s0 = 0;
+    size_t a= 0;
     Graphe g{"../Graphe_NO"};
     std::vector<int> arborescence;
     std::vector<const Aretes*> kruskal;
@@ -77,12 +78,13 @@ int main ()
                 g.kruskalCommunication();
                 break;
             case 4:
-                g.Allegro();
+                a=s0;
+                g.Allegro(a);
                 break;
 
             case 5:
                 std::cout << "Dijstkra: Veuillez saisir le numero du sommet initial : ";
-                s0=1;
+                std::cin >> s0;
                 arborescence=g.dijkstra(s0);
                 afficherParcours(s0,arborescence);
 

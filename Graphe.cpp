@@ -41,11 +41,11 @@ Graphe::Graphe(std::string cheminFichierGraphe) {
             throw std::runtime_error("Problème de lecture d'un arc/arrete et poids"); ///Execute au moment de l execution
         }
         m_sommets[num1]->addSuccesseur(m_sommets[num2]);
-        m_sommets[num1]->addSuccesseuS(m_sommets[num2], num3);
+        m_sommets[num1]->addSuccesseuS(m_sommets[num2], distance);
         ///num1 successeur de num2
         if(!m_estOriente && num1 < num2) {
             m_sommets[num2]->addSuccesseur(m_sommets[num1]);
-            m_sommets[num2]->addSuccesseuS(m_sommets[num1], num3);
+            m_sommets[num2]->addSuccesseuS(m_sommets[num1], distance);
         }
         m_arete.push_back(new Aretes(num1,num2,num3,nomRue, type, distance,flotTot,flot)); /// ajout de rue/avenue
     }
@@ -253,7 +253,7 @@ void Graphe::kruskalCommunication()  {
 
 
 
-void Graphe::Allegro() {
+void Graphe::Allegro(int s0) {
 
 
     ALLEGRO_DISPLAY*display= nullptr;
@@ -354,6 +354,24 @@ void Graphe::Allegro() {
                          al_map_rgb(255,100,255),5.0);
 
 
+        }
+
+        if(s0 != 0) {
+
+            al_draw_textf(font, al_map_rgb(255, 255, 255), 1300, 475,
+                          ALLEGRO_ALIGN_CENTER, "Vous etes sur l'animation %d", s0);
+
+
+
+
+
+            for (int i = 1; i != m_Dijkstra.size(); i++) {
+
+
+                al_draw_textf(font, al_map_rgb(255, 255, 255), 1300,500+i*25 ,
+                              ALLEGRO_ALIGN_CENTER, "Vous etes a %dm de l'animation %d", m_Dijkstra[i],i);
+
+            }
         }
 
         for (int i = 1; i != m_sommets.size(); i++) {
@@ -457,7 +475,7 @@ bool Graphe::getOriente() const {
     return m_estOriente;
 }
 
-std::vector<int> Graphe::dijkstra(int s0) const {
+std::vector<int> Graphe::dijkstra(int s0) {
     std::cout << std::endl << std::endl << "LANCEMENT DE DIJKSTRA :" << std::endl;
     // INITIALISATION
     int nbMarques = 0;
@@ -511,5 +529,16 @@ std::vector<int> Graphe::dijkstra(int s0) const {
     } while (nbMarques < m_sommets.size());
 
     std::cout << std::endl << "FIN DE DIJKSTRA." << std::endl;
+    for(int i=1; i!= predecesseurs.size();i++)
+    {
+        std::cout<<"vous etes a "<< distances[i]<<"m"<< " de l'animation "<<i<<std::endl;
+
+
+    }
+
+
+    m_Dijkstra = distances;
     return predecesseurs;
+
+
 }
