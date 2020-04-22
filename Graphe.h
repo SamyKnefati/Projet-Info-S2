@@ -23,7 +23,7 @@ public:
     std::vector<int> BFS(int numero_S0) const;
     void DFS(int numero_S0, int &chaine) const;
     bool getOriente() const;
-    std::vector< const Aretes*> kruskal() ;
+    void kruskal() ;
     void tri();
     void Allegro(ALLEGRO_FONT *font,std::vector< const Aretes*>&  kruskal );
     //void ford_fulkerson(int depart, int arrivee);

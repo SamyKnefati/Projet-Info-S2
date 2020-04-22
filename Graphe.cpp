@@ -88,7 +88,7 @@ void Graphe::afficher() const {
 }
 
 
-std::vector< const Aretes*> Graphe::kruskal()  {
+void Graphe::kruskal()  {
     /// on trie les aretes
 
     for (int i = 0; i != m_arete.size(); i++) {
@@ -148,7 +148,7 @@ std::vector< const Aretes*> Graphe::kruskal()  {
             m_capaciteChemin+=Arr->GetCapacite();
         }
     }
-
+    m_kruskal=MST;
 
     std::cout<<std::endl<<" Algorithme de Kruskal : "<<std::endl;
 
@@ -162,9 +162,6 @@ std::vector< const Aretes*> Graphe::kruskal()  {
 
     std::cout<<std::endl;
     std::cout<<" capacite Total : "<<m_capaciteChemin<<std::endl;
-    m_kruskal=MST;
-    return m_kruskal;
-
 }
 
 

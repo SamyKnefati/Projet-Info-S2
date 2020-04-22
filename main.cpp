@@ -29,6 +29,7 @@ void afficherParcours(size_t s0, const std::vector<int>& predecesseur){
 
 int main ()
 {
+    ///partie allegro initialisation
     al_init();
     al_init_image_addon();
     al_install_mouse();
@@ -37,26 +38,51 @@ int main ()
     al_init_primitives_addon();
     ALLEGRO_FONT *font;
 
+    /// initialisation du graphe et des valeurs pour notre graphe
     size_t s0 = 0;
     Graphe g{"../Graphe_NO"};
     std::vector<int> arborescence;
+    std::vector<const Aretes*> kruskal;
+
+    /// affichage basique
     g.afficher();
 
-    std::vector<const Aretes*> kruskal;
-    kruskal = g.kruskal();
 
-
-    ///BFS DFS
+    int fin = 0;
     int chaine = 0;
-    std::cout << "BFS: Veuillez saisir le numero du sommet initial pour la recherche du plus court chemin : ";
-    std::cin >> s0;
-    arborescence = g.BFS(s0);
-    std::cout << "Plus courts chemin depuis le sommet " << s0 << "(BFS) : " << std::endl;
-    afficherParcours(s0, arborescence);
-    ///parcours DFS
-    std::cout << "DFS: Veuillez saisir le numero du sommet initial : ";
-    std::cin >> s0;
-    g.DFS(s0, chaine);
-    g.Allegro(font, kruskal);
+    int menu = 0;
+    while(fin!=1){
+        std::cout<< "veuillez choisir une option : " << std::endl;
+        std::cout<< "1) parcours BFS   2) parcours DFS   3) algorithme de kruskal   4) afficher la carte   5) quitter le simulateur " << std::endl;
+        std::cin>>menu;
+        switch(menu){
+            case 1:
+                ///parcours BFS
+                std::cout << "BFS: Veuillez saisir le numero du sommet initial pour la recherche du plus court chemin : ";
+                std::cin >> s0;
+                arborescence = g.BFS(s0);
+                std::cout << "Plus courts chemin depuis le sommet " << s0 << "(BFS) : " << std::endl;
+                afficherParcours(s0, arborescence);
+                break;
+            case 2:
+                ///parcours DFS
+                std::cout << "DFS: Veuillez saisir le numero du sommet initial : ";
+                std::cin >> s0;
+                g.DFS(s0, chaine);
+                break;
+            case 3:
+                g.kruskal();
+                break;
+            case 4:
+                g.Allegro(font, kruskal);
+                break;
+            case 5:
+                fin = 1;
+                break;
+            default:
+                break;
+        }
+    }
+
     return 0;
 }
