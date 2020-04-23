@@ -136,7 +136,7 @@ void Graphe::Kruskal() {
     }
 
 
-void Graphe::Allegro(int s0) {
+void Graphe::Allegro(int s0, int s1) {
 
 
     ALLEGRO_DISPLAY*display= nullptr;
@@ -253,7 +253,7 @@ void Graphe::Allegro(int s0) {
                              al_map_rgb(0,0,0),5.0);
             }
             ///Dijkstra
-            if(s0 != 0)
+            if(s1 != 0)
             {
                 al_draw_textf(font, al_map_rgb(255, 255, 255), 1500, 200,
                               ALLEGRO_ALIGN_CENTER, "Vous etes sur l'animation %d", s0);
@@ -265,23 +265,21 @@ void Graphe::Allegro(int s0) {
             }
 
             ///Sommets
-            for (int i = 1; i != m_sommets.size(); i++) {
-
-                std::cout<<m_sommets[i]->GetType()<<std::endl;
-
+            for (int i = 1; i != m_sommets.size(); i++)
+            {
                 switch(m_sommets[i]->GetType())
                 {
                     case 1 :
                         al_draw_filled_circle(m_sommets[i]->GetX(),m_sommets[i]->GetY(),10,al_map_rgb(255,0,0));
+                        al_draw_textf(font3, al_map_rgb(255, 255, 255), 1500, 600+i*30,
+                                      ALLEGRO_ALIGN_CENTER, "%s", m_sommets[i]->GetName().c_str());
                         break;
                     case 2 :
                         al_draw_filled_circle(m_sommets[i]->GetX(),m_sommets[i]->GetY(),10,al_map_rgb(0,0,0));
                         break;
                     default:
                         break;
-
                 }
-
                 al_draw_textf(font3, al_map_rgb(0, 0, 0), m_sommets[i]->GetX()-50,m_sommets[i]->GetY() ,
                               ALLEGRO_ALIGN_CENTER, "%s", m_sommets[i]->GetName().c_str());
             }
@@ -333,11 +331,6 @@ std::vector<int> Graphe::BFS(int numero_S0) const {
     return predecesseurs;
 }
 
-/*void Graphe::ford_fulkerson(int depart, int arrivee) {
-
-
-}*/
-
 
 void Graphe::DFS(int numero_S0,int &chaine) const {
 
@@ -347,7 +340,7 @@ void Graphe::DFS(int numero_S0,int &chaine) const {
     static std::vector<int> cc;
     pile.push(m_sommets[numero_S0]); // est le sommet s
     couleurs[numero_S0]=1;
-    std::cout<<numero_S0;
+    std::cout<<m_sommets[numero_S0]->GetName()<<std::endl;
     for (auto succ: m_sommets[numero_S0]->getSuccesseur()) {
 
         if(couleurs[succ->getNumero()] == 1){
@@ -579,6 +572,6 @@ void Graphe::kruskalKm() {
         std::cout<<std::endl;
 
     }
-    std::cout<<"le kilometrage total de cet arbre est de " << total << "  km" << std::endl;
+    std::cout<<"le distance totale des cables de communication est de " << total << "  m" << std::endl;
     m_KruskalDistance=arbre;
 }

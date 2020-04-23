@@ -28,7 +28,7 @@ public:
     bool getOriente() const;
     void Kruskal() ;
     std::vector<int> dijkstra(int s0);
-    void Allegro(int a);
+    void Allegro(int a, int b);
     int getMarque(int num) const;
     void ford_fulkerson() const ;
     void changerFlotArr();
