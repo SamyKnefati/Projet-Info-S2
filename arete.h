@@ -8,7 +8,6 @@
 class Aretes {
 
 private:
-    int m_capacite;
     int m_D;
     int m_A;
     int m_distance;
@@ -19,9 +18,8 @@ private:
     int m_flot;
 public:
 
-    Aretes (int D,int A ,int poids, std::string nomArete, int type, int distance, int flotTot, int flot);
+    Aretes (int D,int A , std::string nomArete, int type, int distance, int flotTot, int flot);
     void afficherA() const;
-    int GetCapacite() const;
     int Getm_D() const;
     int Getm_A() const;
     int GetmType() const;

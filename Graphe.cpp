@@ -36,7 +36,7 @@ Graphe::Graphe(std::string cheminFichierGraphe) {
     int num1, num2, num3, type, distance, flotTot, flot;
     std::string nomRue;
     for(int i=0; i<taille; i++){
-        ifs >> num1 >> num2 >> num3 >> nomRue>> type >> distance >> flotTot >> flot;
+        ifs >> num1 >> num2 >> nomRue>> type >> distance >> flotTot >> flot;
         if(ifs.fail()){
             throw std::runtime_error("Problème de lecture d'un arc/arrete et poids"); ///Execute au moment de l execution
         }
@@ -47,7 +47,7 @@ Graphe::Graphe(std::string cheminFichierGraphe) {
             m_sommets[num2]->addSuccesseur(m_sommets[num1]);
             m_sommets[num2]->addSuccesseuS(m_sommets[num1], distance);
         }
-        m_arete.push_back(new Aretes(num1,num2,num3,nomRue, type, distance,flotTot,flot)); /// ajout de rue/avenue
+        m_arete.push_back(new Aretes(num1,num2,nomRue, type, distance,flotTot,flot)); /// ajout de rue/avenue
     }
 
     std::string name;
@@ -98,7 +98,7 @@ void Graphe::kruskalCapacite()  {
 
     for (int i = 0; i != m_arete.size(); i++) {
         for (int a = 0; a != (m_arete.size() - 1); a++) {
-            if (m_arete[a]->GetCapacite() > m_arete[a + 1]->GetCapacite())
+            if (m_arete[a]->getFlotMax() > m_arete[a + 1]->getFlotMax())
             {
                 Aretes *inter;
 
@@ -145,12 +145,12 @@ void Graphe::kruskalCapacite()  {
         if(A<=2 && D<=2){
 
             MST.push_back(m_arete[i]);
-            m_capaciteChemin+=Arr->GetCapacite();
+            m_capaciteChemin+=Arr->getFlotMax();
 
         }
         if( (A>2 && D<2) || (D>2 && A<2)){
             MST.push_back(m_arete[i]);
-            m_capaciteChemin+=Arr->GetCapacite();
+            m_capaciteChemin+=Arr->getFlotMax();
         }
 
         m_sommets[Arr->Getm_D()]->RemiseZero();
@@ -171,6 +171,7 @@ void Graphe::kruskalCapacite()  {
 
     std::cout<<std::endl;
     std::cout<<" capacite Total : "<<m_capaciteChemin<<std::endl;
+    m_capaciteChemin = 0;
 }
 
 void Graphe::kruskalCommunication()  {
@@ -250,6 +251,7 @@ void Graphe::kruskalCommunication()  {
 
     std::cout<<std::endl;
     std::cout<<" distance de cable totale : "<<m_DistanceCable<<std::endl;
+    m_DistanceCable = 0;
 }
 
 
