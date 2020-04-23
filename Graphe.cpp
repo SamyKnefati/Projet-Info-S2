@@ -9,6 +9,7 @@
 #include <allegro5/allegro_ttf.h>
 #include <allegro5/allegro_primitives.h>
 #include <limits>
+#include <algorithm>
 
 
 Graphe::Graphe(std::string cheminFichierGraphe) {
@@ -25,6 +26,8 @@ Graphe::Graphe(std::string cheminFichierGraphe) {
     if(ifs.fail()){
         throw std::runtime_error("Problème de lecture de l'orientation du graphe."); ///Execute au moment de l execution
     }
+    std::cout<<ordre<<std::endl;
+
     int taille;
     ifs >> taille;
     if(ifs.fail()){
@@ -93,88 +96,47 @@ void Graphe::afficher() const {
 }
 
 
-void Graphe::kruskalCapacite()  {
-    /// on trie les aretes
+void Graphe::Kruskal() {
 
-    for (int i = 0; i != m_arete.size(); i++) {
-        for (int a = 0; a != (m_arete.size() - 1); a++) {
-            if (m_arete[a]->getFlotMax() > m_arete[a + 1]->getFlotMax())
-            {
-                Aretes *inter;
 
-                inter = m_arete[a];
-
-                m_arete[a] = m_arete[a + 1];
-
-                m_arete[a + 1] = inter;
-
+        std::sort(m_arete.begin(), m_arete.end(), [](Aretes* a1, Aretes* a2) { return a1->getFlotMax() < a2->getFlotMax(); });
+        //declarer un vecteur pour noter les num�ros de CC des sommets et pouvoir v�rifier si une ar�te ne cr�e pas de cycle
+        std::vector<int> numCC;
+        for(int i=0;i<m_sommets.size();++i){
+            numCC.push_back(i);
+        }
+        std::vector<const Aretes*> arbre;
+        int nbre_Arete=0;//nbre d'ar�tes ins�r�es
+        int n=0;//num�ro de l'ar�te test�e (indice dans le vecteur d'ar�tes)
+        //tant que le nombre d'ar�tes ins�r�es est inf�rieure � l'ordre-1
+        while(nbre_Arete<(m_sommets.size()-2)){
+            //si l'ar�te ne cr�e pas de cycle
+            if(numCC[m_sommets[m_arete[n]->Getm_D()]->getNumero()]!= numCC[m_sommets[m_arete[n]->Getm_A()]->getNumero()]){
+                arbre.push_back(m_arete[n]);//on l'ins�re
+                //mettre � jour les num�ros de comp.connexe
+                int x=numCC[m_sommets[m_arete[n]->Getm_A()]->getNumero()];
+                for(int i=0;i<numCC.size();++i)
+                {//pour chaque sommet
+                    if(numCC[i]==x)
+                    {//s'il a le m�me num�ro de CC que le sommet d'arriv�e
+                        numCC[i]=numCC[m_sommets[m_arete[n]->Getm_D()]->getNumero()];
+                    }
+                }
+                nbre_Arete++;
             }
+            n++;
+        }
+        for(int i=0; i!=arbre.size();i++)
+        {
+            std::cout<<arbre[i]->Getm_D()<<" - "<<arbre[i]->Getm_A();
+            std::cout<<std::endl;
 
         }
 
     }
 
-    std::cout<<std::endl<<"TRI PAR ORDRE CROISSANT"<<std::endl;
-    for(int i=0; i!=m_arete.size();i++)
-    {
 
-        m_arete[i]->afficherA();
-        std::cout<<std::endl;
-
-    }
-
-    ///tri effectue, on finalise kruskal
-
-    std::vector<const Aretes*>MST;
-    const Aretes* Arr;
-    int D,A;
-    m_capaciteChemin=0;
-
-    for(int i=0; i!=m_arete.size();i++)
-    {
-        Arr=m_arete[i];
-
-        m_sommets[Arr->Getm_D()]->Setutiliser();
-        m_sommets[Arr->Getm_A()]->Setutiliser();
-
-
-        D=m_sommets[Arr->Getm_D()]->Getutiliser();
-        A=m_sommets[Arr->Getm_A()]->Getutiliser();
-
-
-        if(A<=2 && D<=2){
-
-            MST.push_back(m_arete[i]);
-            m_capaciteChemin+=Arr->getFlotMax();
-
-        }
-        if( (A>2 && D<2) || (D>2 && A<2)){
-            MST.push_back(m_arete[i]);
-            m_capaciteChemin+=Arr->getFlotMax();
-        }
-
-        m_sommets[Arr->Getm_D()]->RemiseZero();
-        m_sommets[Arr->Getm_A()]->RemiseZero();
-
-    }
-    m_KruskalCpacite=MST;
-
-    std::cout<<std::endl<<" Algorithme de Kruskal : "<<std::endl;
-
-    for(int i=0; i!=MST.size();i++)
-    {
-
-        MST[i]->afficherA();
-        std::cout<<std::endl;
-
-    }
-
-    std::cout<<std::endl;
-    std::cout<<" capacite Total : "<<m_capaciteChemin<<std::endl;
-    m_capaciteChemin = 0;
-}
-
-void Graphe::kruskalCommunication()  {
+/*void Graphe::kruskalCommunication()  {
     /// on trie les aretes
 
     for (int i = 0; i != m_arete.size(); i++) {
@@ -252,7 +214,7 @@ void Graphe::kruskalCommunication()  {
     std::cout<<std::endl;
     std::cout<<" distance de cable totale : "<<m_DistanceCable<<std::endl;
     m_DistanceCable = 0;
-}
+}*/
 
 
 

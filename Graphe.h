@@ -26,8 +26,7 @@ public:
     std::vector<int> BFS(int numero_S0) const;
     void DFS(int numero_S0, int &chaine) const;
     bool getOriente() const;
-    void kruskalCapacite() ;
-    void kruskalCommunication() ;
+    void Kruskal() ;
     std::vector<int> dijkstra(int s0);
     void Allegro(int a);
     int getMarque(int num) const;

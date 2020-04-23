@@ -26,7 +26,14 @@ void afficherParcours(size_t s0, const std::vector<int>& predecesseur){
     }
 }
 
-
+void afficher_arbre(std::vector<const Aretes*> aretes){
+    std::cout<<std::endl<<"liste :"<<std::endl;
+    for (auto a : aretes)
+    {
+        a->afficherA();
+        std::cout<<std::endl;
+    }
+}
 
 int main ()
 {
@@ -37,6 +44,7 @@ int main ()
     al_init_font_addon();
     al_init_ttf_addon();
     al_init_primitives_addon();
+    al_install_keyboard();
 
 
     /// initialisation du graphe et des valeurs pour notre graphe
@@ -53,6 +61,7 @@ int main ()
     int fin = 0;
     int chaine = 0;
     int menu = 0;
+    std::vector<const Aretes*> arbre;
     while(fin!=1){
 
         std::cout<< "veuillez choisir une option : " << std::endl;
@@ -81,9 +90,9 @@ int main ()
                 g.DFS(s0, chaine);
                 break;
             case 3:
-                g.kruskalCapacite();
-                g.kruskalCommunication();
+                g.Kruskal();
                 break;
+
             case 4:
                 a=s0;
                 g.Allegro(a);

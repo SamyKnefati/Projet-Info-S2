@@ -3,10 +3,9 @@
 
 #include <iostream>
 #include <vector>
-#include "arete.h"
 
 class Sommet {
-public:
+private:
     int m_numero;
     int m_x;
     int m_y;
@@ -14,11 +13,12 @@ public:
     std::vector<const Sommet*> m_successeurs;
     std::string m_nomLieu;
     std::vector<std::pair<Sommet *const, int>> m_successeurS;
-    int m_marque;
+
     int m_nbPersMcarre;
     int m_nbPersMcarreTot;
 
 public:
+    int m_marque;
     Sommet(int num);
     int getNumero() const;
     void addSuccesseur(const Sommet* succ);
