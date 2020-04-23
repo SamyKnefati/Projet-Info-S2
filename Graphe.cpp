@@ -133,6 +133,7 @@ void Graphe::Kruskal() {
         }
     std::cout<<"le flot total de cet arbre est de " << total << "  personnes" << std::endl;
         m_KruskalCapacite=arbre;
+        m_capaciteChemin= total;
     }
 
 
@@ -574,4 +575,5 @@ void Graphe::kruskalKm() {
     }
     std::cout<<"le distance totale des cables de communication est de " << total << "  m" << std::endl;
     m_KruskalDistance=arbre;
+    m_DistanceCable=total;
 }
