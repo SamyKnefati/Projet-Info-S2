@@ -1,15 +1,27 @@
 0
-5
-7
-1 2 Rue_de_la_republique 1 950 100 0
-1 3 Pont_Bonaparte 2 950 120 0
-2 3 Metro_A 0 500 70 0
-2 4 xxx 2 850 30 0
-2 5 xxx 2 850 40 0
-3 5 xxxx 2 560 50 0
+11
+13
+1 6 Rue_De_La_Republique 1 260 100 0
+1 7 Rue_De_La_Barre 1 350 150 0
+2 3 Rue_De_La_Republique 1 500 100 0
+2 9 Rue_Grenette 1 450 30 0
+2 6 Rue_De_La_Republique 1 400 100 0
+3 10 Rue_D_Algerie 1 400 50 0
 4 5 Funiculaire 0 50 60 0
-Bellecour 500 670 1500 0
-Cordeliers 660 360 500 0
-Hotel_De_Ville 600 150 700 0
-Vieux_Lyon 300 540 500 0
-Minimes 100 620 400 0
+4 7 Pont_Bonaparte 2 160 200 0
+6 11 Rue_De_Lancienne_Prefecture 1 170 100 0
+7 8 Quai_Saint_Antoine 1 280 200 0
+8 9 Quai_Saint_Antoine 1 280 200 0
+8 11 Rue_De_Lancienne_Prefecture 1 170 100 0
+9 10 Quai_Saint_Antoine 1 450 100 0
+Bellecour 580 650 1500 0 1
+Cordeliers 660 360 500 0 1
+Hotel_De_Ville 650 120 700 0 1
+Vieux_Lyon 300 540 500 0 1
+Minimes 100 620 400 0 1
+Point_De_Controle_1 650 525 200 0 2
+Point_De_Controle_2 420 585 200 0 2
+Point_De_Controle_3 490 470 200 0 2
+Point_De_Controle_4 510 355 200 0 2
+Point_De_Controle_5 440 175 200 0 2
+Place_Des_Jaconbins 570 500 350 0 1

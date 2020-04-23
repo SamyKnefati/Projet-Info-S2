@@ -16,6 +16,7 @@ private:
 
     int m_nbPersMcarre;
     int m_nbPersMcarreTot;
+    int m_type;
 
 public:
     int m_marque;
@@ -39,6 +40,8 @@ public:
     void addNbPersMcarre(int nbPersMcarre);
     void addNbPersMcarreTot(int nbPersMcarreTot);
     void changeNbPersMcarre(int quelNbPers, int nouvelleVal);
+    void addType(int type);
+    int GetType();
 };
 
 #endif

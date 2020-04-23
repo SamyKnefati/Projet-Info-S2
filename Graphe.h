@@ -15,7 +15,7 @@ private:
     int m_DistanceCable=0;
     std::vector< Sommet*> m_sommets;
     std::vector< Aretes*> m_arete;
-    std::vector< const Aretes*>  m_KruskalCpacite;
+    std::vector< const Aretes*>  m_KruskalCapacite;
     std::vector< const Aretes*>  m_KruskalDistance;
     std::vector<int> m_Dijkstra;
 

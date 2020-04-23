@@ -45,7 +45,16 @@ int Sommet::Getutiliser()
 }
 
 void Sommet::addName(std::string nomLieu) {
-m_nomLieu = nomLieu;
+    m_nomLieu = nomLieu;
+}
+
+void Sommet::addType(int type) {
+    m_type = type;
+}
+
+int Sommet::GetType()
+{
+    return m_type;
 }
 
 
