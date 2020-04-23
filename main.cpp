@@ -91,6 +91,7 @@ int main ()
                 break;
             case 3:
                 g.Kruskal();
+                g.kruskalKm();
                 break;
 
             case 4:

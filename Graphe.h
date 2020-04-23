@@ -34,6 +34,7 @@ public:
     void changerFlotArr();
     void changerNbPersMcarreSommet();
     void bloquerArr();
+    void kruskalKm();
 };
 
 #endif

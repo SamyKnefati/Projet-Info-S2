@@ -98,27 +98,25 @@ void Graphe::afficher() const {
 
 void Graphe::Kruskal() {
 
-
+        int total=0;
         std::sort(m_arete.begin(), m_arete.end(), [](Aretes* a1, Aretes* a2) { return a1->getFlotMax() < a2->getFlotMax(); });
-        //declarer un vecteur pour noter les num�ros de CC des sommets et pouvoir v�rifier si une ar�te ne cr�e pas de cycle
-        std::vector<int> numCC;
+        std::vector<int> numCC; /// va nous servir a noter les numero de composantes connexes pour ensuite eviter les cycles
         for(int i=0;i<m_sommets.size();++i){
             numCC.push_back(i);
         }
         std::vector<const Aretes*> arbre;
-        int nbre_Arete=0;//nbre d'ar�tes ins�r�es
-        int n=0;//num�ro de l'ar�te test�e (indice dans le vecteur d'ar�tes)
-        //tant que le nombre d'ar�tes ins�r�es est inf�rieure � l'ordre-1
+        int nbre_Arete=0; ///on defini une variable dans laquelle stocker le nombre d'aretes qu'on insere
+        int n=0; /// on definie une variable qu'on utilisera comme numero d'arete pour parcourir le vector d'aretes
+
         while(nbre_Arete<(m_sommets.size()-2)){
-            //si l'ar�te ne cr�e pas de cycle
-            if(numCC[m_sommets[m_arete[n]->Getm_D()]->getNumero()]!= numCC[m_sommets[m_arete[n]->Getm_A()]->getNumero()]){
-                arbre.push_back(m_arete[n]);//on l'ins�re
-                //mettre � jour les num�ros de comp.connexe
-                int x=numCC[m_sommets[m_arete[n]->Getm_A()]->getNumero()];
+            if(numCC[m_sommets[m_arete[n]->Getm_D()]->getNumero()]!= numCC[m_sommets[m_arete[n]->Getm_A()]->getNumero()]){  ///on verifie que l'arete ne cree pas de cycle
+                arbre.push_back(m_arete[n]);  /// on l'insere dans le vector d'arete qu'on retournera a la fin
+                total += m_arete[n]->getFlotMax(); /// on ajoute a chaque fois le flot max de l'arete en question
+                int x=numCC[m_sommets[m_arete[n]->Getm_A()]->getNumero()];/// on met a jour les numeros de composante connexe
                 for(int i=0;i<numCC.size();++i)
-                {//pour chaque sommet
+                {
                     if(numCC[i]==x)
-                    {//s'il a le m�me num�ro de CC que le sommet d'arriv�e
+                    {
                         numCC[i]=numCC[m_sommets[m_arete[n]->Getm_D()]->getNumero()];
                     }
                 }
@@ -132,7 +130,7 @@ void Graphe::Kruskal() {
             std::cout<<std::endl;
 
         }
-
+    std::cout<<"le flot total de cet arbre est de " << total << "  personnes" << std::endl;
     }
 
 
@@ -555,8 +553,8 @@ void Graphe::ford_fulkerson() const {
             std::cout<< name << " est augmentable de : " << augmentable << std::endl;
         }
     }
-    std::cout << "dans la zone, le nombre de personnes total pouvant se deplacer sur les routes, avenues ponts ou metro est de :" << flotTot << "personnes" << std::endl;
-    std::cout << "le nombre de personnes totale circulant est de :" << flot << std::endl;
+    std::cout << "dans la zone, le nombre de personnes total pouvant se deplacer sur les routes, avenues ponts ou metro est de " << flotTot << "personnes" << std::endl;
+    std::cout << "le nombre de personnes totale circulant est de " << flot << "personnes" << std::endl;
 }
 void Graphe::bloquerArr(){
     int numArrB;
@@ -627,6 +625,44 @@ void Graphe::changerNbPersMcarreSommet() {
     std::cout << "entrer la nouvelle valeur a definir :" << std::endl;
     std::cin >> nouvelleValeur;
     m_sommets[numSom]->changeNbPersMcarre(change,nouvelleValeur);   ///modifie la valeur du nombre de personnes au metre carre(actuel ou total) en evitant les erreurs
+
+}
+
+void Graphe::kruskalKm() {
+
+    int total=0;
+    std::sort(m_arete.begin(), m_arete.end(), [](Aretes* a1, Aretes* a2) { return a1->Getdistance() < a2->Getdistance(); });
+    std::vector<int> numCC; /// va nous servir a noter les numero de composantes connexes pour ensuite eviter les cycles
+    for(int i=0;i<m_sommets.size();++i){
+        numCC.push_back(i);
+    }
+    std::vector<const Aretes*> arbre;
+    int nbre_Arete=0; ///on defini une variable dans laquelle stocker le nombre d'aretes qu'on insere
+    int n=0; /// on definie une variable qu'on utilisera comme numero d'arete pour parcourir le vector d'aretes
+
+    while(nbre_Arete<(m_sommets.size()-2)){
+        if(numCC[m_sommets[m_arete[n]->Getm_D()]->getNumero()]!= numCC[m_sommets[m_arete[n]->Getm_A()]->getNumero()]){  ///on verifie que l'arete ne cree pas de cycle
+            arbre.push_back(m_arete[n]);  /// on l'insere dans le vector d'arete qu'on retournera a la fin
+            total += m_arete[n]->Getdistance(); /// on ajoute a chaque fois le kilometrage de l'arete en question
+            int x=numCC[m_sommets[m_arete[n]->Getm_A()]->getNumero()];/// on met a jour les numeros de composante connexe
+            for(int i=0;i<numCC.size();++i)
+            {
+                if(numCC[i]==x)
+                {
+                    numCC[i]=numCC[m_sommets[m_arete[n]->Getm_D()]->getNumero()];
+                }
+            }
+            nbre_Arete++;
+        }
+        n++;
+    }
+    for(int i=0; i!=arbre.size();i++)
+    {
+        std::cout<<arbre[i]->Getm_D()<<" - "<<arbre[i]->Getm_A();
+        std::cout<<std::endl;
+
+    }
+    std::cout<<"le kilometrage total de cet arbre est de " << total << "  km" << std::endl;
 
 }
 
