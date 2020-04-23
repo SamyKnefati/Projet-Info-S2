@@ -609,7 +609,9 @@ void Graphe::changerNbPersMcarreSommet() {
     int nouvelleValeur;
     int fin = 0;
     while(fin != 1){
-        std::cout << "voulez-vous changer : 1) le nombre de personnes presentes au metre carre   2) la limite de personnes au metre carre" << std::endl;
+        std::cout << "voulez-vous changer : "<<std::endl<<
+                     "1) le nombre de personnes presentes au metre carre"<<std::endl<<
+                     "2) la limite de personnes au metre carre" << std::endl;
         std::cin >> change;
         std::cout << std::endl;
         if(change == 1 || change == 2){

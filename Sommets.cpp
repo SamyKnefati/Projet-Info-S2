@@ -18,7 +18,8 @@ std::string Sommet::GetName() {
 
 void Sommet::afficher() const {
 
-    std::cout << "Sommets:" << m_numero<<" : "<< m_nomLieu <<" : "<<"COORS" << m_x<<";"<<m_y<<";  ";
+    std::cout << "Sommets:" << m_numero<<" : "<< m_nomLieu <<" : "<<"COORS : " << m_x<<"; " <<m_y<<";  "<< std::endl<<
+    "----------------------------------------------------"<< std::endl;
 
 }
 

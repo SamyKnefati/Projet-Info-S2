@@ -56,15 +56,22 @@ int main ()
     while(fin!=1){
 
         std::cout<< "veuillez choisir une option : " << std::endl;
-        std::cout<< "1) parcours BFS   2) parcours DFS   3) algorithme de kruskal   4) afficher la carte   5) Dijsktra   6)info ford-fulkerson   7)effectuer des modifications   8) quitter le simulateur " << std::endl;
+        std::cout<< "1) parcours BFS  "<< std::endl<<
+                    "2) parcours DFS" <<std::endl <<
+                    "3) algorithme de kruskal" << std::endl <<
+                    "4) afficher la carte" <<std::endl <<
+                    "5) Dijsktra" <<std::endl <<
+                    "6) info ford-fulkerson" <<std::endl<<
+                    "7) effectuer des modifications" <<std::endl<<
+                    "8) quitter le simulateur " << std::endl;
         std::cin>>menu;
         switch(menu){
             case 1:
                 ///parcours BFS
-                std::cout << "BFS: Veuillez saisir le numero du sommet initial pour la recherche du plus court chemin : ";
+                std::cout << "BFS: Veuillez saisir le numero du sommet initial pour la recherche du plus court chemin : " <<std::endl;
                 std::cin >> s0;
                 arborescence = g.BFS(s0);
-                std::cout << "Plus courts chemin depuis le sommet " << s0 << "(BFS) : " << std::endl;
+                std::cout << "Plus court chemin depuis le sommet "<< s0<< std::endl;
                 afficherParcours(s0, arborescence);
                 break;
             case 2:
