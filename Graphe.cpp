@@ -76,18 +76,19 @@ Graphe::~Graphe() {
 
 
 void Graphe::afficher() const {
-    std::cout << std::endl <<"Graphe ";
+    std::cout << std::endl <<"Le graphe est ";
     std::cout << (m_estOriente ? " oriente" : "non oriente") << std::endl;
-    std::cout << "Ordre : " << m_sommets.size()-1 << std::endl;
+    std::cout << "Nombre d'attractions : " << m_sommets.size()-1 << std::endl;
+    std::cout << "Nombre de chemins repertories : " << m_arete.size() << std::endl<< std::endl;
     std::cout << "Liste des Sommets : " << std::endl;
     for(auto addrSommet : m_sommets){
         addrSommet-> afficher();
     }
 
-    std::cout <<std::endl<< "Liste des Arretes : " << std::endl;
+    std::cout <<std::endl<< "Liste des Arretes : " << std::endl<< std::endl;
     for (auto addrArretes : m_arete){
         addrArretes->afficherA();
-        std::cout << std::endl;
+        std::cout << std::endl<< std::endl;
     }
 }
 

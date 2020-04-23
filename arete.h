@@ -17,7 +17,6 @@ private:
     std::string m_nomArete;
     int m_flotTot;
     int m_flot;
-
 public:
 
     Aretes (int D,int A ,int poids, std::string nomArete, int type, int distance, int flotTot, int flot);

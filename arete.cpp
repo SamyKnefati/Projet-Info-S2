@@ -7,7 +7,18 @@ Aretes::Aretes(int D, int A, int poids,std::string nomArete, int type, int dista
 m_type{type}, m_distance{distance},m_flotTot{flotTot},m_flot{flot} {}
 
 void Aretes::afficherA() const {
-    std::cout << m_nomArete << " : " << m_D << "===>" << m_A << "        capacite : " << m_capacite<< "    type:"<<m_type<<" distance :"<<m_distance;
+std::string type_rue;
+        if (m_type == 2){
+            type_rue += " autre";
+        }
+        else if (m_type == 1 ){
+            type_rue += " rue";
+        }
+
+    std::cout << m_nomArete << " : " << m_D << " ===> " << m_A << "" <<std::endl<<
+    "    capacite : " << m_capacite <<" personnes "<<std::endl<<
+    "    type:" << type_rue <<std::endl<<
+    "    distance :"<<m_distance<< "m";
 }
 
 
