@@ -38,6 +38,7 @@ public:
     void marque(int n);
     void addNbPersMcarre(int nbPersMcarre);
     void addNbPersMcarreTot(int nbPersMcarreTot);
+    void changeNbPersMcarre(int quelNbPers, int nouvelleVal);
 };
 
 #endif

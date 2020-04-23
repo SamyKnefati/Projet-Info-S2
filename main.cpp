@@ -101,8 +101,7 @@ int main ()
                         g.changerFlotArr();
                         break;
                     case 2:
-                        ///ici mettre fonction pour changer un nombre de mersonnes au m²
-                        std::cout << "tu as choisi 2" << std::endl;
+                        g.changerNbPersMcarreSommet();
                         break;
                     case 3:
                         ///ici mettre une fonction permettant de bloquer une arrete

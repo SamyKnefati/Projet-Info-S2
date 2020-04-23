@@ -33,6 +33,7 @@ public:
     int getMarque(int num) const;
     void ford_fulkerson() const ;
     void changerFlotArr();
+    void changerNbPersMcarreSommet();
 };
 
 #endif

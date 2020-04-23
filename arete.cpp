@@ -55,7 +55,7 @@ void Aretes::changeFlot(int quelFlot, int nouvelleVal) {
         if (nouvelleVal > m_flotTot){
             std::cout << "vous allez surcharger l'arete veuillez recommencer avec une valeur inferieur au flot total ou vous pouvez modifier le flot total" << std::endl;
         }
-        if(nouvelleVal <  m_flotTot){
+        if(nouvelleVal <=  m_flotTot){
             m_flot = nouvelleVal;
             std::cout << "flot de :" << m_nomArete << "prend la nouvelle valeur : " << nouvelleVal << std::endl;
         }

@@ -92,3 +92,25 @@ void Sommet::addNbPersMcarreTot(int nbPersMcarreTot) {
  m_nbPersMcarreTot = nbPersMcarreTot;
 }
 
+void Sommet::changeNbPersMcarre(int quelNbPers, int nouvelleVal) {
+    if(quelNbPers == 1){ ///personnes au metre carre presentes actuellement a changer
+        if (nouvelleVal > m_nbPersMcarreTot){
+            std::cout << "vous allez surcharger le lieux, veuillez recommencer avec une valeur inferieur au nombre de personnes total autorise ou vous pouvez modifier le cette valeur" << std::endl;
+        }
+        if(nouvelleVal <=  m_nbPersMcarreTot){
+            m_nbPersMcarre = nouvelleVal;
+            std::cout << "nombre de personnes par metre carre actuel de :" << m_nomLieu << "prend la nouvelle valeur : " << nouvelleVal << std::endl;
+        }
+    }
+
+    if(quelNbPers == 2){ /// personnes au metre carre maximum autorise a changer
+
+        if(nouvelleVal < m_nbPersMcarre){
+            std::cout << "la nouvelle valeur autorise de personnes par metre carre est inférieur au nombre de personne par metre carre actuel, veuillez recommencer avec une valeur differente" << std::endl;
+        }
+        if(nouvelleVal >= m_nbPersMcarre) {
+            m_nbPersMcarreTot = nouvelleVal;
+            std::cout << "valeur autorise de personnes par metre carre de :" << m_nomLieu << "prend la nouvelle valeur : " << nouvelleVal << std::endl;
+        }
+    }
+}
