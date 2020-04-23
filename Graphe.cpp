@@ -577,14 +577,22 @@ void Graphe::ford_fulkerson() const {
     std::cout << "dans la zone, le nombre de personnes total pouvant se deplacer sur les routes, avenues ponts ou metro est de :" << flotTot << "personnes" << std::endl;
     std::cout << "le nombre de personnes totale circulant est de :" << flot << std::endl;
 }
-
+void Graphe::bloquerArr(){
+    int numArrB;
+    std::cout << "quelle rue voulez vous bloquer : ";
+    std::cin>>numArrB;
+    m_arete[numArrB]->changeFlot(0,0);
+    std::cout << "l'arete numero : "<< numArrB<< " est desormais bloquee"<< std::endl << std::endl<<std::endl;
+}
 void Graphe::changerFlotArr() {
     int change;
     int numArr;
     int nouvelleValeur;
     int fin = 0;
     while(fin != 1){
-        std::cout << "voulez-vous changer : 1) le flot   2) le flot total" << std::endl;
+        std::cout << "voulez-vous changer :"<<std::endl<<
+                      "1) le flot"<<std::endl<<
+                      "2) le flot total" << std::endl;
         std::cin >> change;
         std::cout << std::endl;
         if(change == 1 || change == 2){
@@ -595,10 +603,14 @@ void Graphe::changerFlotArr() {
         }
     }
 
-    std::cout << "donner le numero de l'arrete en question :";
+    std::cout << "donner le numero de l'arete en question : ";
     std::cin >> numArr;
+    while (numArr > m_arete.size()){
+        std::cout<< "veuillez saisir une arete valide"<< std::endl;
+        std::cin >> numArr;
+    }
     std::cout << std::endl;
-    std::cout << "entrer la nouvelle valeur à définir" << std::endl;
+    std::cout << "entrer la nouvelle valeur a definir" << std::endl;
     std::cin >> nouvelleValeur;
     m_arete[numArr]->changeFlot(change,nouvelleValeur);   ///modifie la valeur du flot total ou du flot actuel en evitant les erreurs
 
@@ -625,8 +637,13 @@ void Graphe::changerNbPersMcarreSommet() {
 
     std::cout << "donner le numero du sommet en question :";
     std::cin >> numSom;
+    while (numSom > m_sommets.size()-1){
+        std::cout << "veuillez saisir un sommet valide : "<< std::endl;
+        std::cin >> numSom;
+    }
+
     std::cout << std::endl;
-    std::cout << "entrer la nouvelle valeur à définir" << std::endl;
+    std::cout << "entrer la nouvelle valeur a definir :" << std::endl;
     std::cin >> nouvelleValeur;
     m_sommets[numSom]->changeNbPersMcarre(change,nouvelleValeur);   ///modifie la valeur du nombre de personnes au metre carre(actuel ou total) en evitant les erreurs
 

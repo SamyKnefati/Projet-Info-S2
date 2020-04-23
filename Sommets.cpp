@@ -107,7 +107,7 @@ void Sommet::changeNbPersMcarre(int quelNbPers, int nouvelleVal) {
     if(quelNbPers == 2){ /// personnes au metre carre maximum autorise a changer
 
         if(nouvelleVal < m_nbPersMcarre){
-            std::cout << "la nouvelle valeur autorise de personnes par metre carre est inférieur au nombre de personne par metre carre actuel, veuillez recommencer avec une valeur differente" << std::endl;
+            std::cout << "la nouvelle valeur autorise de personnes par metre carre est inferieur au nombre de personne par metre carre actuel, veuillez recommencer avec une valeur differente" << std::endl;
         }
         if(nouvelleVal >= m_nbPersMcarre) {
             m_nbPersMcarreTot = nouvelleVal;

@@ -64,24 +64,31 @@ int Aretes::getFlot() const {
 void Aretes::changeFlot(int quelFlot, int nouvelleVal) {
     if(quelFlot == 1){
         if (nouvelleVal > m_flotTot){
+            std::cout << std::endl;
             std::cout << "vous allez surcharger l'arete veuillez recommencer avec une valeur inferieur au flot total ou vous pouvez modifier le flot total" << std::endl;
         }
         if(nouvelleVal <=  m_flotTot){
             m_flot = nouvelleVal;
-            std::cout << "flot de :" << m_nomArete << "prend la nouvelle valeur : " << nouvelleVal << std::endl;
+            std::cout << "le nombre de personnes de : " << m_nomArete << " est maintenant de : " << nouvelleVal << std::endl<< std::endl;
         }
     }
 
     if(quelFlot == 2){
 
         if(nouvelleVal < m_flot){
-            std::cout << "la nouvelle valeur de flot total est inférieur au flot actuel, veuillez recommencer avec une valeur differente" << std::endl;
+            std::cout << "la nouvelle valeur de flot total est inferieur au flot actuel, veuillez recommencer avec une valeur differente" << std::endl;
         }
         if(nouvelleVal >= m_flot) {
             m_flotTot = nouvelleVal;
-            std::cout << "flot total de :" << m_nomArete << "prend la nouvelle valeur : " << nouvelleVal << std::endl;
+            std::cout << "la capacite totale de : " << m_nomArete << " est maintenant de : " << nouvelleVal<< " personnes" << std::endl;
         }
     }
-}
+    if(quelFlot == 0){
+
+
+        m_flotTot = nouvelleVal;
+    }
+    }
+
 
 

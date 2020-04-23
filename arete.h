@@ -30,6 +30,7 @@ public:
     int getFlot() const ;
     std::string GetName() const ;
     void changeFlot(int quelFlot, int nouvelleVal);
+
 };
 
 

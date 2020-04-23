@@ -100,7 +100,9 @@ int main ()
             case 7:
                 int changement;
                 std::cout << "quels changements voulez vous effectuer : " << std::endl;
-                std::cout << "1) changer un flot   2) changer le nombre de personnes sur un lieu   3) bloquer une rue" << std::endl;
+                std::cout << "1) changer un flot "<<std::endl<<
+                             "2) changer le nombre de personnes sur un lieu"<<std::endl<<
+                             "3) bloquer une rue" << std::endl;
                 std::cin >> changement;
 
                 switch (changement){
@@ -111,8 +113,8 @@ int main ()
                         g.changerNbPersMcarreSommet();
                         break;
                     case 3:
-                        ///ici mettre une fonction permettant de bloquer une arrete
-                        std::cout << "tu as choisi 3" << std::endl;
+                        g.bloquerArr();
+
                         break;
                     default:
                         break;

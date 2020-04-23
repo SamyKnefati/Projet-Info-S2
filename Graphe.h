@@ -34,6 +34,7 @@ public:
     void ford_fulkerson() const ;
     void changerFlotArr();
     void changerNbPersMcarreSommet();
+    void bloquerArr();
 };
 
 #endif
