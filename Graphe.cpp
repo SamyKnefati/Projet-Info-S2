@@ -223,136 +223,152 @@ void Graphe::Allegro(int s0) {
 
     ALLEGRO_DISPLAY*display= nullptr;
     ALLEGRO_MOUSE_STATE mouse;
-    //ALLEGRO_BITMAP* map ;
+    ALLEGRO_BITMAP* map = al_load_bitmap("../map.JPG");
     ALLEGRO_EVENT_QUEUE *Queue;
-    ALLEGRO_FONT *font;
-    ALLEGRO_FONT *font2;
+    ALLEGRO_EVENT_QUEUE *queue;
+    ALLEGRO_FONT *font = al_load_ttf_font("../police.TTF", 30, 0);
+    ALLEGRO_FONT *font2 = al_load_ttf_font("../police.TTF", 60, 0);
+    ALLEGRO_FONT *font3 = al_load_ttf_font("../police.TTF", 25, 0);
     bool isEnd;
+    int b=0, Y=200, c=0,d=0;
 
 
     al_set_target_backbuffer(display);
     ALLEGRO_EVENT event={0};
-
-
-    display= al_create_display(1600,800);
-   // map = al_load_bitmap("../map.JPG");
-    font = al_load_ttf_font("../police.TTF", 30, 0);
-    font2 = al_load_ttf_font("../police.TTF", 60, 0);
+    ALLEGRO_EVENT Event={0};
+    display= al_create_display(1920,1000);
     Queue = al_create_event_queue();
+    queue = al_create_event_queue();
     al_set_target_backbuffer(display);
     al_register_event_source(Queue,al_get_display_event_source(display));
+    al_register_event_source(Queue,al_get_keyboard_event_source());
 
+    al_register_event_source(queue,al_get_display_event_source(display));
+    al_register_event_source(queue,al_get_keyboard_event_source());
 
     while(isEnd != TRUE) {
 
+        al_draw_textf(font2, al_map_rgb(255, 255, 255), 960,100 / 2 - al_get_font_ascent(font),
+                      ALLEGRO_ALIGN_CENTER, "Fete des lumieres 2021: ");
+        al_draw_textf(font2, al_map_rgb(255, 255, 255), 960,1000 / 2 - al_get_font_ascent(font),
+                      ALLEGRO_ALIGN_CENTER, " [ APPUYER SUR ENTREE POUR DEMARRER LA SIMULATION: ");
 
-       // al_draw_bitmap(map, 10, 0, 0);
-        al_draw_textf(font2, al_map_rgb(255, 255, 255), 1200,100 / 2 - al_get_font_ascent(font),
-                ALLEGRO_ALIGN_CENTER, "Fete des lumieres 2021: ");
-        al_draw_textf(font, al_map_rgb(255, 255, 255), 1400,200,
-                      ALLEGRO_ALIGN_CENTER, " : LIEUX ");
-        al_draw_filled_circle(1330,213,10,al_map_rgb(255,255,255));
-        al_draw_textf(font, al_map_rgb(255, 0, 0), 1400,250,
-                      ALLEGRO_ALIGN_CENTER, " ---: TRANSPORTS EN COMMUN ");
-        al_draw_textf(font, al_map_rgb(0, 255, 0), 1400,300,
-                      ALLEGRO_ALIGN_CENTER, " ---: RUES ");
-        al_draw_textf(font, al_map_rgb(0, 0, 255), 1400,350,
-                      ALLEGRO_ALIGN_CENTER, " ---: PONTS ");
-
-        al_draw_textf(font, al_map_rgb(255, 255, 255), 1200,750,
-                      ALLEGRO_ALIGN_CENTER, "  Capacite totale d'acceuil  : %d vistieurs ", m_capaciteChemin);
-
-        al_draw_textf(font, al_map_rgb(255, 255, 255), 1200,700,
-                      ALLEGRO_ALIGN_CENTER, "  Distance cable de communication  : %d m ", m_DistanceCable);
-
-
-
-
-        for (int i = 0; i != m_arete.size(); i++) {
-
-
-
-            switch(m_arete[i]->GetmType())
-
+        if(event.type == ALLEGRO_EVENT_KEY_DOWN)
+        {
+            switch(event.keyboard.keycode)
             {
-
-                case 0:
-
-
-                    al_draw_line(m_sommets[m_arete[i]->Getm_D()]->GetX(),m_sommets[m_arete[i]->Getm_D()]->GetY(),
-                                 m_sommets[m_arete[i]->Getm_A()]->GetX(),m_sommets[m_arete[i]->Getm_A()]->GetY(),
-                                 al_map_rgb(255,0,0),15.0);
+                case ALLEGRO_KEY_ENTER:
+                    b=1;
                     break;
-                case 1:
-                    al_draw_line(m_sommets[m_arete[i]->Getm_D()]->GetX(),m_sommets[m_arete[i]->Getm_D()]->GetY(),
-                                 m_sommets[m_arete[i]->Getm_A()]->GetX(),m_sommets[m_arete[i]->Getm_A()]->GetY(),
-                                 al_map_rgb(0,255,0),15.0);
+                default:
                     break;
-                case 2:
-                    al_draw_line(m_sommets[m_arete[i]->Getm_D()]->GetX(),m_sommets[m_arete[i]->Getm_D()]->GetY(),
-                                 m_sommets[m_arete[i]->Getm_A()]->GetX(),m_sommets[m_arete[i]->Getm_A()]->GetY(),
-                                 al_map_rgb(0,0,255),15.0);
-                    break;
+            }
+        }
+
+        if(b==1)
+        {
+
+            al_clear_to_color(al_map_rgb(0,0,0));
+            al_draw_bitmap(map, 10, 0, 0);
+            al_draw_textf(font2, al_map_rgb(255, 255, 255), 1280,100 / 2 - al_get_font_ascent(font),
+                          ALLEGRO_ALIGN_CENTER, "Fete des lumieres 2021: ");
+
+            al_draw_textf(font2, al_map_rgb(255, 255, 255), 240,800,
+                          ALLEGRO_ALIGN_CENTER, "1) INFOS RESEAUX :");
+
+            al_draw_textf(font, al_map_rgb(255, 255, 255), 540,870,
+                          ALLEGRO_ALIGN_CENTER, " : LIEUX ");
+            al_draw_filled_circle(480,885,10,al_map_rgb(255,255,255));
+
+            al_draw_textf(font, al_map_rgb(255, 0, 0), 240,870,
+                          ALLEGRO_ALIGN_CENTER, " ---: TRANSPORTS EN COMMUN ");
+
+            al_draw_textf(font, al_map_rgb(0, 255, 0), 240,940,
+                          ALLEGRO_ALIGN_CENTER, " ---: RUES ");
+
+            al_draw_textf(font, al_map_rgb(0, 0, 255), 540,940,
+                          ALLEGRO_ALIGN_CENTER, " ---: PONTS ");
+
+            al_draw_textf(font2, al_map_rgb(255, 255, 255), 1050,200,
+                          ALLEGRO_ALIGN_CENTER, "2) LOCALISATION :");
+            al_draw_textf(font2, al_map_rgb(255, 255, 255), 1000,600,
+                          ALLEGRO_ALIGN_CENTER, "3) ANIMATIONS ");
+
+            al_draw_textf(font, al_map_rgb(255, 255, 255), 940,870,
+                          ALLEGRO_ALIGN_CENTER, "  Capacite totale d'acceuil  : %d vistieurs ", m_capaciteChemin);
+
+            al_draw_textf(font, al_map_rgb(255, 255, 255), 940,940,
+                          ALLEGRO_ALIGN_CENTER, "  Distance cable de communication  : %d m ", m_DistanceCable);
+
+
+
+            for (int i = 0; i != m_arete.size(); i++)
+            {
+                switch(m_arete[i]->GetmType())
+                {
+                    case 0:
+                        al_draw_line(m_sommets[m_arete[i]->Getm_D()]->GetX(),m_sommets[m_arete[i]->Getm_D()]->GetY(),
+                                     m_sommets[m_arete[i]->Getm_A()]->GetX(),m_sommets[m_arete[i]->Getm_A()]->GetY(),
+                                     al_map_rgb(255,100,100),15.0);
+                        break;
+                    case 1:
+                        al_draw_line(m_sommets[m_arete[i]->Getm_D()]->GetX(),m_sommets[m_arete[i]->Getm_D()]->GetY(),
+                                     m_sommets[m_arete[i]->Getm_A()]->GetX(),m_sommets[m_arete[i]->Getm_A()]->GetY(),
+                                     al_map_rgb(100,255,100),15.0);
+                        break;
+                    case 2:
+                        al_draw_line(m_sommets[m_arete[i]->Getm_D()]->GetX(),m_sommets[m_arete[i]->Getm_D()]->GetY(),
+                                     m_sommets[m_arete[i]->Getm_A()]->GetX(),m_sommets[m_arete[i]->Getm_A()]->GetY(),
+                                     al_map_rgb(0,0,255),15.0);
+                        break;
+                }
 
 
             }
 
 
-        }
 
 
-       for(int i=0; i != m_KruskalCpacite.size(); i++)
-        {
+            ///Kruskal
+            for(int i=0; i != m_KruskalCpacite.size(); i++)
+            {
+                al_draw_line((m_sommets[m_KruskalCpacite[i]->Getm_D()]->GetX()),m_sommets[m_KruskalCpacite[i]->Getm_D()]->GetY(),
+                             (m_sommets[m_KruskalCpacite[i]->Getm_A()]->GetX()),m_sommets[m_KruskalCpacite[i]->Getm_A()]->GetY(),
+                             al_map_rgb(255,255,255),10.0);
+            }
 
-            al_draw_line((m_sommets[m_KruskalCpacite[i]->Getm_D()]->GetX()),m_sommets[m_KruskalCpacite[i]->Getm_D()]->GetY(),
-                         (m_sommets[m_KruskalCpacite[i]->Getm_A()]->GetX()),m_sommets[m_KruskalCpacite[i]->Getm_A()]->GetY(),
-                         al_map_rgb(255,255,255),10.0);
+            for(int i=0; i != m_KruskalDistance.size(); i++)
+            {
+                al_draw_line((m_sommets[m_KruskalDistance[i]->Getm_D()]->GetX()),m_sommets[m_KruskalDistance[i]->Getm_D()]->GetY(),
+                             (m_sommets[m_KruskalDistance[i]->Getm_A()]->GetX()),m_sommets[m_KruskalDistance[i]->Getm_A()]->GetY(),
+                             al_map_rgb(0,0,0),5.0);
+            }
 
+            ///Dijkstra
+            if(s0 != 0)
+            {
+                al_draw_textf(font, al_map_rgb(255, 255, 255), 1500, 200,
+                              ALLEGRO_ALIGN_CENTER, "Vous etes sur l'animation %d", s0);
+                for (int i = 1; i != m_Dijkstra.size(); i++)
+                {
+                    al_draw_textf(font, al_map_rgb(255, 255, 255), 1500,200+i*30 ,
+                                  ALLEGRO_ALIGN_CENTER, " - Vous etes a %dm de l'animation %d", m_Dijkstra[i],i);
+                }
+            }
 
-        }
-
-        for(int i=0; i != m_KruskalDistance.size(); i++)
-        {
-
-            al_draw_line((m_sommets[m_KruskalDistance[i]->Getm_D()]->GetX()),m_sommets[m_KruskalDistance[i]->Getm_D()]->GetY(),
-                         (m_sommets[m_KruskalDistance[i]->Getm_A()]->GetX()),m_sommets[m_KruskalDistance[i]->Getm_A()]->GetY(),
-                         al_map_rgb(255,100,255),5.0);
-
-
-        }
-
-        if(s0 != 0) {
-
-            al_draw_textf(font, al_map_rgb(255, 255, 255), 1300, 475,
-                          ALLEGRO_ALIGN_CENTER, "Vous etes sur l'animation %d", s0);
-
-
-
-
-
-            for (int i = 1; i != m_Dijkstra.size(); i++) {
-
-
-                al_draw_textf(font, al_map_rgb(255, 255, 255), 1300,500+i*25 ,
-                              ALLEGRO_ALIGN_CENTER, "Vous etes a %dm de l'animation %d", m_Dijkstra[i],i);
-
+            ///Sommets
+            for (int i = 1; i != m_sommets.size(); i++) {
+                al_draw_filled_circle(m_sommets[i]->GetX(),m_sommets[i]->GetY(),10,al_map_rgb(0,0,0));
+                al_draw_textf(font3, al_map_rgb(0, 0, 0), m_sommets[i]->GetX()-50,m_sommets[i]->GetY() ,
+                              ALLEGRO_ALIGN_CENTER, "%s", m_sommets[i]->GetName().c_str());
             }
         }
 
-        for (int i = 1; i != m_sommets.size(); i++) {
-
-
-            al_draw_filled_circle(m_sommets[i]->GetX(),m_sommets[i]->GetY(),10,al_map_rgb(255,255,255));
-
-
-            al_draw_textf(font, al_map_rgb(255, 255, 255), m_sommets[i]->GetX()+110,m_sommets[i]->GetY() ,
-                          ALLEGRO_ALIGN_CENTER, "%s", m_sommets[i]->GetName().c_str());
-
-        }
 
         al_flip_display();
 
         al_wait_for_event(Queue,&event);
+        al_wait_for_event(queue,&Event);
 
         if(event.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
         {
@@ -365,7 +381,8 @@ void Graphe::Allegro(int s0) {
 
     al_destroy_display(display);
     al_destroy_event_queue(Queue);
-    //al_destroy_bitmap(map);
+    al_destroy_event_queue(queue);
+    al_destroy_bitmap(map);
     al_destroy_font(font);
     al_destroy_font(font2);
 }
