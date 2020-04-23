@@ -577,3 +577,29 @@ void Graphe::ford_fulkerson() const {
     std::cout << "le nombre de personnes totale circulant est de :" << flot << std::endl;
 }
 
+void Graphe::changerFlotArr() {
+    int change;
+    int numArr;
+    int nouvelleValeur;
+    int fin = 0;
+    while(fin != 1){
+        std::cout << "voulez-vous changer : 1) le flot   2) le flot total" << std::endl;
+        std::cin >> change;
+        std::cout << std::endl;
+        if(change == 1 || change == 2){
+            fin = 1;
+        }
+        else{
+            std::cout << "veuillez recommencer : " << std::endl;
+        }
+    }
+
+    std::cout << "donner le numero de l'arrete en question :";
+    std::cin >> numArr;
+    std::cout << std::endl;
+    std::cout << "entrer la nouvelle valeur à définir" << std::endl;
+    std::cin >> nouvelleValeur;
+    m_arete[numArr]->changeFlot(change,nouvelleValeur);   ///modifie la valeur du flot total ou du flot actuel en evitant les erreurs
+
+}
+

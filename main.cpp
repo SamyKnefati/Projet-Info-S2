@@ -56,7 +56,7 @@ int main ()
     while(fin!=1){
 
         std::cout<< "veuillez choisir une option : " << std::endl;
-        std::cout<< "1) parcours BFS   2) parcours DFS   3) algorithme de kruskal   4) afficher la carte   5) Dijsktra   6)info ford-fulkerson   7) quitter le simulateur " << std::endl;
+        std::cout<< "1) parcours BFS   2) parcours DFS   3) algorithme de kruskal   4) afficher la carte   5) Dijsktra   6)info ford-fulkerson   7)effectuer des modifications   8) quitter le simulateur " << std::endl;
         std::cin>>menu;
         switch(menu){
             case 1:
@@ -91,6 +91,29 @@ int main ()
                 g.ford_fulkerson();
                 break;
             case 7:
+                int changement;
+                std::cout << "quels changements voulez vous effectuer : " << std::endl;
+                std::cout << "1) changer un flot   2) changer le nombre de personnes sur un lieu   3) bloquer une rue" << std::endl;
+                std::cin >> changement;
+
+                switch (changement){
+                    case 1:
+                        g.changerFlotArr();
+                        break;
+                    case 2:
+                        ///ici mettre fonction pour changer un nombre de mersonnes au m²
+                        std::cout << "tu as choisi 2" << std::endl;
+                        break;
+                    case 3:
+                        ///ici mettre une fonction permettant de bloquer une arrete
+                        std::cout << "tu as choisi 3" << std::endl;
+                        break;
+                    default:
+                        break;
+                }
+
+                break;
+            case 8:
                 fin = 1;
                 break;
             default:

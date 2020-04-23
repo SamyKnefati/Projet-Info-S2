@@ -32,6 +32,7 @@ public:
     void Allegro(int a);
     int getMarque(int num) const;
     void ford_fulkerson() const ;
+    void changerFlotArr();
 };
 
 #endif
