@@ -10,6 +10,7 @@
 #include <allegro5/allegro_primitives.h>
 #include <limits>
 #include <algorithm>
+#include <iostream>
 
 
 Graphe::Graphe(std::string cheminFichierGraphe) {
@@ -83,7 +84,8 @@ void Graphe::afficher() const {
     std::cout << std::endl <<"Le graphe est ";
     std::cout << (m_estOriente ? " oriente" : "non oriente") << std::endl;
     std::cout << "Nombre d'attractions : " << m_sommets.size()-1 << std::endl;
-    std::cout << "Nombre de chemins repertories : " << m_arete.size() << std::endl<< std::endl;
+    std::cout << "Nombre de chemins  : " << m_arete.size() << std::endl<< std::endl;
+    stdw::cout <<"----------------------------------------------------"<<std::endl;
     std::cout << "Liste des Sommets : " << std::endl;
     for(auto addrSommet : m_sommets){
         addrSommet-> afficher();
@@ -507,7 +509,7 @@ void Graphe::changerFlotArr() {
 }
 
 void Graphe::changerNbPersMcarreSommet() {
-    int change;
+    int change;++
     int numSom;
     int nouvelleValeur;
     int fin = 0;
